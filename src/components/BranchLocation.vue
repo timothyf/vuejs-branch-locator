@@ -1,66 +1,24 @@
 <template>
-    <v-card color="grey accent-4" class="elevation-8 fill-height">
-        <v-container fluid grid-list-lg>
-            <v-layout row wrap>
 
-                <v-flex xs1>
-                    <v-icon class="recenter-map-icon" title="Recenter map location" @click="onRecenterMapLocation">my_location</v-icon>
-                </v-flex>
-                <v-flex xs10 offset-xs1>
-                    <div class="subheading" v-show="!isSelectedLocationEdited">
-                        <span>Your location:</span>
-                        <a @click="onEditSelectedLocation"
-                            href="#" class="white--text">{{ selectedLocation }}</a>
-                    </div>
-                    <div class="subheading location-edit" v-show="isSelectedLocationEdited">
-                        <v-combobox label="Select a location"
-                            ref="locationCombobox"
-                            v-model="selectedLocation"
-                            :items="availableLocations"
-                            @change="onLocationChange"
-                            @blur.self="onLocationBlur"
-                            @input="onLocationBlur"
-                            class="inline-input">
-                        </v-combobox>
-                    </div>
-                </v-flex>
+    <v-flex xs12 :key="'store-card-' + store.id"
+        class="store-container" @mouseover="hoveredOnStore=store.id" @mouseleave="hoveredOnStore=null" :class="[(hoveredOnStore===store.id && selectedStore!==store.id)? 'animated pulse store-hovered-on': '']">
+        <v-card class="store-item-card"
+            :class="{isSelected: selectedStore === store.id}"
+            @click.capture="onStoreClick(store.id)">
+            <v-card-text>
+                <router-link :to="{name: 'Store', params: {id: store.id}}">
+                    <div class="subheading font-weight-medium">{{store.displayName}}</div>
+                </router-link>
+                <div>{{ store.address.address}}</div>
+                <div>{{ store.address.city}}, {{store.address.state}} {{store.address.postalCode}}</div>
+                <div>
+                    <span><a :href="'tel:'+phone">{{ store.phone }}</a></span>
+                    <span class="store-hours">{{ getStoreHoursDesc(store) }}</span>
+                </div>
+            </v-card-text>
+        </v-card>
+    </v-flex>
 
-                <v-flex xs12 class="stores-list">
-                    <div class="subheading">Nearby Branches ({{ storesCount }})</div>
-                    <v-container fluid class="stores-list-container">
-                        <v-layout row wrap>
-                          <branch-location
-                            v-for="store in stores"
-                            v-bind:store="store"
-                            v-bind:key="store.id"
-                          ></branch-location>
-
-                            <!-- <template v-for="store in stores">
-                                <v-flex xs12 :key="'store-card-' + store.id"
-                                    class="store-container" @mouseover="hoveredOnStore=store.id" @mouseleave="hoveredOnStore=null" :class="[(hoveredOnStore===store.id && selectedStore!==store.id)? 'animated pulse store-hovered-on': '']">
-                                    <v-card class="store-item-card"
-                                        :class="{isSelected: selectedStore === store.id}"
-                                        @click.capture="onStoreClick(store.id)">
-                                        <v-card-text>
-                                            <router-link :to="{name: 'Store', params: {id: store.id}}">
-                                                <div class="subheading font-weight-medium">{{ store.displayName}}</div>
-                                            </router-link>
-                                            <div>{{ store.address.address}}</div>
-                                            <div>{{ store.address.city}}, {{store.address.state}} {{store.address.postalCode}}</div>
-                                            <div>
-                                                <span><a :href="'tel:'+store.phone">{{ store.phone }}</a></span>
-                                                <span class="store-hours">{{ getStoreHoursDesc(store) }}</span>
-                                            </div>
-                                        </v-card-text>
-                                    </v-card>
-                                </v-flex>
-                            </template> -->
-                        </v-layout>
-                    </v-container>
-                </v-flex>
-            </v-layout>
-        </v-container>
-    </v-card>
 </template>
 
 <script>
@@ -78,10 +36,8 @@ export default {
             hoveredOnStore: null
         }
     },
-    components: {
-        'branch-location': BranchLocation
-    },
     props: {
+        store: { type: Object},
         userLocation: { type: Object, default: () => { return {state: 'FL', city: 'Orlando', postalCode: '32821'} } }
     },
     computed: {

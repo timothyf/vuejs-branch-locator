@@ -17,6 +17,7 @@
 <script>
 import SearchPanel from './SearchPanel'
 import MapPanel from './MapPanel'
+//import BranchLocation from './BranchLocation'
 
 export default {
     data () {
@@ -27,6 +28,7 @@ export default {
     components: {
         'app-search-panel': SearchPanel,
         'app-map-panel': MapPanel
+      //  'branch-location': BranchLocation
     }
 }
 </script>
