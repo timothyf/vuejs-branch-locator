@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueResource from 'vue-resource'
-import Cosmic from '../api/cosmic'
+import client from '../api/mock'
 
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -111,54 +111,43 @@ export default new Vuex.Store({
             }
         },
         fetchCities ({commit, dispatch, state}) {
-            // will populate the cities from cosmic js REST API
-            const params = {
-                type_slug: 'cities'
-            }
-            Cosmic.getObjectsByType(params)
-                .then(data => {
-                    // need to transform cosmic json into our app json format, before we store into vuex
-                    // TODO: need to take this logic outside this function or change the app logic to work
-                    // TODO: with cosmic json format without any reformating.
-                    let locations = {}
-                    let country = ''
-                    data.objects.forEach(city => {
-                        const cityKey = city.slug.toUpperCase()
-                        const stateKey = city.metadata.state.slug.toUpperCase()
+          return client
+            .fetchCities()
+                    .then(data => {
+                        let locations = {}
+                        let country = ''
+                        data.objects.forEach(city => {
+                            const cityKey = city.slug.toUpperCase()
+                            const stateKey = city.metadata.state.slug.toUpperCase()
 
-                        if (!(stateKey in locations)) {
-                            locations[stateKey] = {}
-                        }
-                        if (!(cityKey in locations[stateKey])) {
-                            locations[stateKey][cityKey] = {}
-                        }
-                        if (!country) {
-                            country = city.metadata.state.metadata.country.title
-                        }
-                        locations[stateKey][cityKey].city = city.title
-                        locations[stateKey][cityKey].state = city.metadata.state.title
-                        locations[stateKey][cityKey].postalCode = city.metadata.postal_code
-                        locations[stateKey][cityKey].dataUrl = city.metadata.data_url
-                        locations[stateKey][cityKey].country = country
-                        locations[stateKey][cityKey].geoPoint = {
-                            latitude: city.metadata.lat,
-                            longitude: city.metadata.lng
-                        }
+                            if (!(stateKey in locations)) {
+                                locations[stateKey] = {}
+                            }
+                            if (!(cityKey in locations[stateKey])) {
+                                locations[stateKey][cityKey] = {}
+                            }
+                            if (!country) {
+                                country = city.metadata.state.metadata.country.title
+                            }
+                            locations[stateKey][cityKey].city = city.title
+                            locations[stateKey][cityKey].state = city.metadata.state.title
+                            locations[stateKey][cityKey].postalCode = city.metadata.postal_code
+                            locations[stateKey][cityKey].dataUrl = city.metadata.data_url
+                            locations[stateKey][cityKey].country = country
+                            locations[stateKey][cityKey].geoPoint = {
+                                latitude: city.metadata.lat,
+                                longitude: city.metadata.lng
+                            }
+                        })
+                        commit('SET_AVAILABLE_LOCATIONS', locations)
+                        // set the initial default location
+                        dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'})
                     })
-                    commit('SET_AVAILABLE_LOCATIONS', locations)
-                    // set the initial default location
-                    dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'})
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+
         },
         fetchStoreCardImages ({commit}) {
-            // will get the images from Cosmic js media folder and store in vuex
-            const params = {
-                folder: 'store-card-images'
-            }
-            Cosmic.getMedia(params)
+          return client
+            .fetchStoreCardImages()
                 .then(data => {
                     commit('SET_STORE_CARD_IMAGES', data.media)
                 })
@@ -167,12 +156,9 @@ export default new Vuex.Store({
                 })
         },
         fetchMapIcons ({commit}) {
-            // will fetch the map icons images from cosmic
             let icons = {}
-            const params = {
-                folder: 'map-images'
-            }
-            Cosmic.getMedia(params)
+            return client
+              .fetchMapImages()
                 .then(data => {
                     data.media.forEach(item => {
                         if (item.original_name === 'Shopping_Bag_3.svg') {

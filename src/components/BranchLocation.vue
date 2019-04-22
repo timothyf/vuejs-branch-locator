@@ -12,7 +12,7 @@
                 <div>{{ store.address.address}}</div>
                 <div>{{ store.address.city}}, {{store.address.state}} {{store.address.postalCode}}</div>
                 <div>
-                    <span><a :href="'tel:'+phone">{{ store.phone }}</a></span>
+                    <span><a :href="'tel:'+ store.phone">{{ store.phone }}</a></span>
                     <span class="store-hours">{{ getStoreHoursDesc(store) }}</span>
                 </div>
             </v-card-text>

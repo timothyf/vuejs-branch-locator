@@ -5,7 +5,6 @@
             class="map"
             :options="{styles: styles}"
             :center.sync="mapCenter"
-            :mapStyle="red"
             :zoom.sync="zoom">
 
             <googlemaps-marker

@@ -4,10 +4,7 @@
             <v-flex xs12 sm6>
                 <transition appear enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
                 <v-card class="text-xs-center elevation-6">
-                    <v-card-media
-                        height="240px"
-                        :src="storeCardImage()">
-                    </v-card-media>
+                    <v-card-media height="240px" :src="storeCardImage()"></v-card-media>
                     <v-card-title primary-title class="justify-center">
                         <h3 class="headline mb-0">{{ storeData.displayName }}</h3>
                         <div>#{{ id }}</div>

@@ -1,9 +1,9 @@
 
-# store-locator app with Vue, Cosmic JS, and Google Maps
+# store-locator app with Vue and Google Maps
 
 <img width="1336" alt="screen shot 2018-07-28 at 4 56 07 pm" src="https://user-images.githubusercontent.com/8376035/43360640-4a5da978-9287-11e8-86e8-65480d378346.png" alt="Store locator app with Cosmic JS">
 
-> Store locator app using Vue, Cosmic JS, and Google Maps.
+> Store locator app using Vue and Google Maps.
 
 ## Demo
 <a href="http://store-locator.cosmicapp.co/">store-locator-app-demo</a>
@@ -13,7 +13,6 @@
 - Vuex
 - Vuetify
 - Vue-googlemaps
-- Cosmic JS
 - Vue-resource
 
 ## Build Setup
@@ -34,11 +33,10 @@ npm run build --report
 # configure env variables
 rename .env.sample to .env and paste your API keys
 
-# before you delploy to Cosmic
+# before you delploy
 change you .env config
 npm build
 npm start
-# if all works, then you can delpoy to Cosmic JS from the dashboard -> settings -> hosting
 
 # run unit tests
 npm run unit
