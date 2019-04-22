@@ -29,7 +29,6 @@ new Vue({
     components: { App },
     template: '<App/>',
     created () {
-        this.$store.dispatch('fetchMapIcons')
         this.$store.dispatch('fetchCities')
         this.$store.dispatch('fetchStoreCardImages')
     }

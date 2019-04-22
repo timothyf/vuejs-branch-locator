@@ -14,7 +14,10 @@ export default new Vuex.Store({
         availableLocations: {},
         stores: [],
         storeCardImages: [],
-        mapIcons: {},
+        mapIcons: {
+          "defaultIcon":"https://s3.amazonaws.com/vuejsbranchlocator/BlackShoppingBag.svg",
+          "selectedIcon":"https://s3.amazonaws.com/vuejsbranchlocator/BlueShoppingBag.svg"
+        },
         storesDataUrl: '../../static/data/'
     },
     getters: {
@@ -93,9 +96,6 @@ export default new Vuex.Store({
                 const location = state.availableLocations[payload.state][payload.city]
                 commit('SET_SELECTED_LOCATION', location)
                 // need to fetch the corresponding stores
-                // we could instead issue ajax call or db search by city, state, and zip code
-                // but we need to have a database with all stores by location and zip code
-                // const storesDataUrl = state.availableLocations[location.state][location.city]['dataUrl']
                 // read stores data from local json file
                 Vue.http.get(state.storesDataUrl + location.dataUrl)
                     .then(response => response.json())
@@ -105,7 +105,8 @@ export default new Vuex.Store({
                             commit('SET_STORES', stores)
                         }
                     })
-            } else {
+            }
+            else {
                 commit('SET_STORES', [])
                 // TODO: need to show an error message that no result is found
             }
@@ -113,36 +114,11 @@ export default new Vuex.Store({
         fetchCities ({commit, dispatch, state}) {
           return client
             .fetchCities()
-                    .then(data => {
-                        let locations = {}
-                        let country = ''
-                        data.objects.forEach(city => {
-                            const cityKey = city.slug.toUpperCase()
-                            const stateKey = city.metadata.state.slug.toUpperCase()
-
-                            if (!(stateKey in locations)) {
-                                locations[stateKey] = {}
-                            }
-                            if (!(cityKey in locations[stateKey])) {
-                                locations[stateKey][cityKey] = {}
-                            }
-                            if (!country) {
-                                country = city.metadata.state.metadata.country.title
-                            }
-                            locations[stateKey][cityKey].city = city.title
-                            locations[stateKey][cityKey].state = city.metadata.state.title
-                            locations[stateKey][cityKey].postalCode = city.metadata.postal_code
-                            locations[stateKey][cityKey].dataUrl = city.metadata.data_url
-                            locations[stateKey][cityKey].country = country
-                            locations[stateKey][cityKey].geoPoint = {
-                                latitude: city.metadata.lat,
-                                longitude: city.metadata.lng
-                            }
-                        })
-                        commit('SET_AVAILABLE_LOCATIONS', locations)
-                        // set the initial default location
-                        dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'})
-                    })
+                .then(data => {
+                    commit('SET_AVAILABLE_LOCATIONS', data)
+                    // set the initial default location
+                    dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'})
+                })
 
         },
         fetchStoreCardImages ({commit}) {
@@ -150,24 +126,6 @@ export default new Vuex.Store({
             .fetchStoreCardImages()
                 .then(data => {
                     commit('SET_STORE_CARD_IMAGES', data.media)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        },
-        fetchMapIcons ({commit}) {
-            let icons = {}
-            return client
-              .fetchMapImages()
-                .then(data => {
-                    data.media.forEach(item => {
-                        if (item.original_name === 'Shopping_Bag_3.svg') {
-                            icons.defaultIcon = item.imgix_url
-                        } else if (item.original_name === 'Shopping_Bag_6.svg') {
-                            icons.selectedIcon = item.imgix_url
-                        }
-                    })
-                    commit('SET_MAP_ICONS', icons)
                 })
                 .catch(err => {
                     console.log(err)
