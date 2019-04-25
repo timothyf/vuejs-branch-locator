@@ -1,34 +1,24 @@
 <template>
-    <v-container fluid fill-height grid-list-lg>
-        <v-layout row wrap align-content-start >
-            <v-flex xs4 sm3>
-                <transition appear enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
-                    <app-search-panel></app-search-panel>
-                </transition>
-            </v-flex>
-            <v-flex xs8 sm9>
-                <transition appear enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-                    <app-map-panel></app-map-panel>
-                </transition>
-            </v-flex>
-        </v-layout>
-    </v-container>
+  <div class="container fluid fill-height grid-list-lg">
+    <div class="layout row wrap">
+      <div class="flex xs4 sm3">
+        <search-results></search-results>
+      </div>
+      <div class="flex xs8 sm9">
+        <map-panel></map-panel>
+      </div>
+    </div>
+  </div>
 </template>
-<script>
-import SearchPanel from './SearchPanel'
-import MapPanel from './MapPanel'
-//import BranchLocation from './BranchLocation'
 
-export default {
-    data () {
-        return {
-            message: 'Welcome to the store locator'
-        }
-    },
-    components: {
-        'app-search-panel': SearchPanel,
-        'app-map-panel': MapPanel
-      //  'branch-location': BranchLocation
-    }
-}
+<script>
+  import SearchResults from './SearchResults'
+  import MapPanel from './MapPanel'
+
+  export default {
+      components: {
+          'search-results': SearchResults,
+          'map-panel': MapPanel
+      }
+  }
 </script>

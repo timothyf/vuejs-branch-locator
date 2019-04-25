@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
 import VueGoogleMaps from 'vue-googlemaps'
 import 'vue-googlemaps/dist/vue-googlemaps.css'
 import App from './App'
@@ -30,6 +29,5 @@ new Vue({
     template: '<App/>',
     created () {
         this.$store.dispatch('fetchCities')
-        this.$store.dispatch('fetchStoreCardImages')
     }
 })

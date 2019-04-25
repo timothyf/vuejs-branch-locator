@@ -13,12 +13,21 @@ export default new Vuex.Store({
         selectedStore: null,
         availableLocations: {},
         stores: [],
-        storeCardImages: [],
         mapIcons: {
           "defaultIcon":"https://s3.amazonaws.com/vuejsbranchlocator/BlackShoppingBag.svg",
           "selectedIcon":"https://s3.amazonaws.com/vuejsbranchlocator/BlueShoppingBag.svg"
         },
-        storesDataUrl: '../../static/data/'
+        storesDataUrl: '../../static/data/',
+        storeCardImages: [
+          "../../static/storecardimages/abundance-agriculture-bananas-264537.jpg",
+          "../../static/storecardimages/awesome-background-1051747.jpg",
+          "../../static/storecardimages/aisle-beverages-bottles-811108.jpg",
+          "../../static/storecardimages/apple-basket-buy-1260305.jpg",
+          "../../static/storecardimages/bananas-fruits-grocery-4621.jpg",
+          "../../static/storecardimages/barcode-boutique-brand-1243362.jpg",
+          "../../static/storecardimages/basket-bright-carbohydrate-1073767.jpg",
+          "../../static/storecardimages/bazaar-business-candy-942320.jpg"
+        ]
     },
     getters: {
         userLocation (state) {
@@ -74,12 +83,6 @@ export default new Vuex.Store({
         },
         SET_AVAILABLE_LOCATIONS (state, locations) {
             state.availableLocations = locations
-        },
-        SET_STORE_CARD_IMAGES (state, images) {
-            state.storeCardImages = images
-        },
-        SET_MAP_ICONS (state, icons) {
-            state.mapIcons = icons
         }
     },
     actions: {
@@ -120,16 +123,6 @@ export default new Vuex.Store({
                     dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'})
                 })
 
-        },
-        fetchStoreCardImages ({commit}) {
-          return client
-            .fetchStoreCardImages()
-                .then(data => {
-                    commit('SET_STORE_CARD_IMAGES', data.media)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
         }
     }
 })

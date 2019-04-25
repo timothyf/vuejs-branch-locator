@@ -5,7 +5,6 @@
 ## Libraries
 - Vue
 - Vuex
-- Vuetify
 - Vue-googlemaps
 - Vue-resource
 

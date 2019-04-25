@@ -1,9 +1,0 @@
-{
-  "media": [{
-    "name": "Shopping_Bag_6.svg",
-    "url": "https://s3.amazonaws.com/vuejsbranchlocator/BlueShoppingBag.svg"
-  }, {
-    "name": "Shopping_Bag_3.svg",
-    "imgix_url": "https://s3.amazonaws.com/vuejsbranchlocator/BlackShoppingBag.svg"
-  }]
-}

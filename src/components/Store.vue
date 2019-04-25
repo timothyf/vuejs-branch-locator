@@ -59,7 +59,7 @@ export default {
             let allImages = this.$store.getters.storeCardImages
             if (allImages.length) {
                 const index = Math.floor(Math.random() * allImages.length)
-                return allImages[index].imgix_url
+                return allImages[index]
             } else {
                 // TODO: add local static image url here.
                 return ''
