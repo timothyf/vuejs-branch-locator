@@ -1,6 +1,6 @@
 <template>
-  <div class="flex store-container xs12">
-    <div class="store-item-card v-card {isSelected: selectedStore === store.id}">
+  <div class="branch-location-container">
+    <div class="v-card {isSelected: selectedStore === store.id}">
       <v-card class="store-item-card" :class="{isSelected: selectedStore === store.id}" @click.capture="onStoreClick(store.id)">
         <div class="v-card__text">
           <div class="store-display-name">{{store.displayName}}</div>
@@ -105,17 +105,11 @@ export default {
 </script>
 
 <style>
-.stores-list-container {
-  padding-left: 0;
-  padding-right: 0;
-  height: 60vh;
-  overflow: auto;
-  padding-top: 10px;
-}
-
-.store-container.store-hovered-on .store-item-card {
-  outline: 5px solid #9FA8DA;
-  background-color: #BBDEFB;
+.branch-location-container {
+  flex: 1 1 auto;
+  flex-basis: 100%;
+  flex-grow: 0;
+  max-width: 100%;
 }
 
 .store-display-name {
