@@ -1,11 +1,16 @@
 <template>
   <div id="map-container">
     <googlemaps-map ref="map" class="map" :options="{styles: styles}" :center.sync="mapCenter" :zoom.sync="zoom">
-
-      <googlemaps-marker v-for="marker in mapMarkers" :key="marker.id" :title="marker.title" :animation="marker.animation" :icon="marker.icon" :position="marker.position" @click="onMapMarkerClick(marker.id)" @mouseover="onMapMarkerMouseOver(marker.id)"
-        @mouseout="onMapMarkerMouseOut(marker.id)">
+      <googlemaps-marker v-for="marker in mapMarkers"
+                         :key="marker.id"
+                         :title="marker.title"
+                         :animation="marker.animation"
+                         :icon="marker.icon"
+                         :position="marker.position"
+                         @click="onMapMarkerClick(marker.id)"
+                         @mouseover="onMapMarkerMouseOver(marker.id)"
+                         @mouseout="onMapMarkerMouseOut(marker.id)">
       </googlemaps-marker>
-
     </googlemaps-map>
   </div>
 </template>
@@ -77,9 +82,7 @@ export default {
       const marker = this.mapMarkers[id]
       marker.animation = 4
     },
-    // -------------------
-    // other methods
-    // -------------------
+
     updateMapCenter(location) {
       // to update the map center we need some time delay, otherwise the change wouldn't work
       this.mapMarkers = null
@@ -115,7 +118,8 @@ export default {
       // will repositioned the map center to the specific location
       if (this.ignoreCenterOnSelectedStore) {
         this.ignoreCenterOnSelectedStore = false
-      } else {
+      }
+      else {
         if (location) {
           this.mapCenter = location
         }
@@ -126,7 +130,8 @@ export default {
       // or the selected location if no store is selected
       if (this.selectedStore && this.mapMarkers && this.mapMarkers[this.selectedStore]) {
         this.centerOnStore(this.mapMarkers[this.selectedStore].position)
-      } else if (this.selectedLocation) {
+      }
+      else if (this.selectedLocation) {
         // this.updateMapCenter(this.selectedLocation)
         const location = {
           lat: this.selectedLocation.geoPoint.latitude,
@@ -168,13 +173,11 @@ export default {
 </script>
 
 <style>
-#map-container {
-  height: 100%;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12) !important;
-}
+  #map-container {
+    height: 100%;
+  }
 
-.map {
-  flex: 100% 1 1;
-  height: 100%;
-}
+  .map {
+    height: 100%;
+  }
 </style>

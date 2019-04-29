@@ -14,8 +14,8 @@ export default new Vuex.Store({
         availableLocations: {},
         stores: [],
         mapIcons: {
-          "defaultIcon":"https://s3.amazonaws.com/vuejsbranchlocator/BlackShoppingBag.svg",
-          "selectedIcon":"https://s3.amazonaws.com/vuejsbranchlocator/BlueShoppingBag.svg"
+          "defaultIcon":"http://maps.google.com/mapfiles/kml/paddle/purple-circle.png",
+          "selectedIcon":"http://maps.google.com/mapfiles/kml/paddle/red-circle.png"
         },
         storesDataUrl: '../../static/data/',
         storeCardImages: [
@@ -42,14 +42,28 @@ export default new Vuex.Store({
         availableLocations (state) {
             return state.availableLocations
         },
+        /*
+        [
+          {
+            value: "option 1"
+          },
+          {
+            value: "option 2"
+          },
+          {
+            value: "option 3"
+          }
+        ]*/
         availableLocationsShort (state) {
-            const data = []
-            for (let stateKey in state.availableLocations) {
-                for (let cityKey in state.availableLocations[stateKey]) {
-                    data.push(state.availableLocations[stateKey][cityKey].city + ', ' + stateKey)
-                }
-            }
-            return data
+          const data = [];
+          for (let stateKey in state.availableLocations) {
+              for (let cityKey in state.availableLocations[stateKey]) {
+                var location = {};
+                location.value = state.availableLocations[stateKey][cityKey].city + ', ' + stateKey;
+                data.push(location.value);
+              }
+          }
+          return data
         },
         stores (state) {
             return state.stores
@@ -57,7 +71,7 @@ export default new Vuex.Store({
         getStoreById (state, getters) {
             return (Id) => {
                 return state.stores.find(item => {
-                    return item.id === Id
+                    return item.id === Id;
                 })
             }
         },
@@ -65,7 +79,7 @@ export default new Vuex.Store({
             return state.storeCardImages
         },
         mapIcons (state) {
-            return state.mapIcons
+            return state.mapIcons;
         }
     },
     mutations: {
@@ -82,7 +96,7 @@ export default new Vuex.Store({
             state.selectedStore = store
         },
         SET_AVAILABLE_LOCATIONS (state, locations) {
-            state.availableLocations = locations
+          state.availableLocations = locations
         }
     },
     actions: {
@@ -90,31 +104,35 @@ export default new Vuex.Store({
             // TODO: need to add function to detect user location using google maps location ws
             commit('SET_USER_LOCATION', payload)
         },
-        updateSelectedStore ({commit}, payload) {
+        onStoreClick({commit, dispatch, state}, storeId) {
+          dispatch('updateSelectedStore', storeId);
+        },
+        updateSelectedStore({commit}, payload) {
+            console.log("updateSelectedStore payload = " + payload);
             commit('SET_SELECTED_STORE', payload)
         },
-        updateSelectedLocation ({commit, state}, payload) {
+        updateSelectedLocation({commit, state}, payload) {
             // payload: location object {state: 'FL', city: 'Orlando', postalCode: '32821'}
             if (payload.state in state.availableLocations && payload.city in state.availableLocations[payload.state]) {
-                const location = state.availableLocations[payload.state][payload.city]
-                commit('SET_SELECTED_LOCATION', location)
-                // need to fetch the corresponding stores
-                // read stores data from local json file
-                Vue.http.get(state.storesDataUrl + location.dataUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data) {
-                            const stores = data
-                            commit('SET_STORES', stores)
-                        }
-                    })
+              const location = state.availableLocations[payload.state][payload.city]
+              commit('SET_SELECTED_LOCATION', location)
+              // fetch the corresponding stores
+              // read stores data from local json file
+              Vue.http.get(state.storesDataUrl + location.dataUrl)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data) {
+                        const stores = data;
+                        commit('SET_STORES', stores);
+                      }
+                  })
             }
             else {
-                commit('SET_STORES', [])
-                // TODO: need to show an error message that no result is found
+              commit('SET_STORES', [])
+              // TODO: need to show an error message that no result is found
             }
         },
-        fetchCities ({commit, dispatch, state}) {
+        fetchCities({commit, dispatch, state}) {
           return client
             .fetchCities()
                 .then(data => {

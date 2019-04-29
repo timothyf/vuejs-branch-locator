@@ -28,6 +28,6 @@ new Vue({
     components: { App },
     template: '<App/>',
     created () {
-        this.$store.dispatch('fetchCities')
+      this.$store.dispatch('fetchCities')
     }
 })
