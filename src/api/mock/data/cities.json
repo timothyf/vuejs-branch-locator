@@ -4,7 +4,7 @@
       "city": "Jacksonville",
       "state": "Florida",
       "postalCode": 32302,
-      "dataUrl": "stores_jacksonville_fl.json",
+      "dataUrl": "branches_jacksonville_fl.json",
       "country": "USA",
       "geoPoint": {
         "latitude": 30.325974,
@@ -15,7 +15,7 @@
       "city": "Miami",
       "state": "Florida",
       "postalCode": 33131,
-      "dataUrl": "stores_miami_fl.json",
+      "dataUrl": "branches_miami_fl.json",
       "country": "USA",
       "geoPoint": {
         "latitude": 25.771205,
@@ -26,7 +26,7 @@
       "city": "Orlando",
       "state": "Florida",
       "postalCode": 32801,
-      "dataUrl": "stores_orlando_fl.json",
+      "dataUrl": "branches_orlando_fl.json",
       "country": "USA",
       "geoPoint": {
         "latitude": 28.536694,
@@ -37,7 +37,7 @@
       "city": "Tempa",
       "state": "Florida",
       "postalCode": 33602,
-      "dataUrl": "stores_tempa_fl.json",
+      "dataUrl": "branches_tempa_fl.json",
       "country": "USA",
       "geoPoint": {
         "latitude": 27.948891,

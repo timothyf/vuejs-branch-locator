@@ -1,68 +1,61 @@
 <template>
   <div id="search-results">
-    <location-search></location-search>
-    <div>Nearby Branches ({{ storesCount }})</div>
-    <branch-location v-for="(store, index) in stores"
-                     v-bind:store="store"
+    <branch-location v-for="(branch, index) in branches"
+                     v-bind:branch="branch"
                      :index="index"
-                     v-bind:key="store.id"></branch-location>
+                     v-bind:key="branch.id"></branch-location>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import BranchLocation from './BranchLocation'
-import LocationSearch from './LocationSearch'
 
 export default {
   data() {
     return {
-      ignoreScrollToSelectedStore: false
+      ignoreScrollToSelectedBranch: false
     }
   },
-    components: {
-      'branch-location': BranchLocation,
-      'location-search': LocationSearch
-    },
+  components: {
+    'branch-location': BranchLocation,
+  },
     computed: {
-      selectedStore: {
+      selectedBranch: {
         get() {
-          return this.$store.getters.selectedStore
+          return this.$store.getters.selectedBranch
         },
         set(value) {
-          this.updateSelectedStore(value)
+          this.updateSelectedBranch(value)
         }
       },
-      stores () {
-        return this.$store.getters.stores
-      },
-      storesCount () {
-        return this.stores.length
+      branches () {
+        return this.$store.getters.branches
       }
     },
     methods: {
-      ...mapActions(['updateSelectedStore']),
-      scrollToSelectedStore() {
-        const storesList = document.querySelector('#search-results');
-        const selectedStore = document.querySelector('.store-item-card.isSelected');
-        if (storesList && selectedStore) {
-          storesList.scrollTop = selectedStore.offsetTop - selectedStore.offsetHeight;
+      ...mapActions(['updateSelectedBranch']),
+      scrollToSelectedBranch() {
+        const branchesList = document.querySelector('#search-results');
+        const selectedBranch = document.querySelector('.branch-location-card.isSelected');
+        if (branchesList && selectedBranch) {
+          branchesList.scrollTop = selectedBranch.offsetTop - selectedBranch.offsetHeight;
         }
       },
       resetComponentData() {
-        this.ignoreScrollToSelectedStore = false;
+        this.ignoreScrollToSelectedBranch = false;
       }
     },
     watch: {
-      selectedStore (newValue, oldValue) {
-          // need to wait until the selected store class changes
-          if (this.ignoreScrollToSelectedStore) {
-            this.ignoreScrollToSelectedStore = false;
+      selectedBranch (newValue, oldValue) {
+          // need to wait until the selected branch class changes
+          if (this.ignoreScrollToSelectedBranch) {
+            this.ignoreScrollToSelectedBranch = false;
           }
           else {
             // triger the auto scroll only if the selection is triggered from outside the list
             setTimeout(() => {
-                this.scrollToSelectedStore()
+                this.scrollToSelectedBranch()
             }, 50);
           }
       }

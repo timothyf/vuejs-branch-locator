@@ -22,7 +22,6 @@ import dropdown from "./dropdown";
 
 export default {
     data () {
-  //    var availableLocations = this.$store.availableLocations;
       return {
         isSelectedLocationEdited: false,
         editedLocation: null
@@ -47,7 +46,6 @@ export default {
             return location.city + ', ' + location.state;
           },
           set(newValue) {
-            // store the edited location in temp variable before confirming and commit to vuex store
             this.editedLocation = newValue;
           }
       },
@@ -96,6 +94,9 @@ export default {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  #location-search a {
+    color: white;
   }
   .location-edit {
     position: relative;

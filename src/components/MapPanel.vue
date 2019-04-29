@@ -30,7 +30,7 @@ export default {
       zoom: 11,
       mapMarkers: null,
       mapMarkerIconSize: null,
-      ignoreCenterOnSelectedStore: false,
+      ignoreCenterOnSelectedBranch: false,
       styles: mapStyles
     }
   },
@@ -38,16 +38,16 @@ export default {
     selectedLocation() {
       return this.$store.getters.selectedLocation
     },
-    selectedStore: {
+    selectedBranch: {
       get() {
-        return this.$store.getters.selectedStore
+        return this.$store.getters.selectedBranch
       },
       set(value) {
-        this.updateSelectedStore(value)
+        this.updateSelectedBranch(value)
       }
     },
-    stores() {
-      return this.$store.getters.stores
+    branches() {
+      return this.$store.getters.branches
     },
     mapIcons() {
       return this.$store.getters.mapIcons
@@ -57,19 +57,19 @@ export default {
     selectedLocation() {
       this.updateMapCenter(this.selectedLocation)
     },
-    selectedStore(newValue, oldValue) {
+    selectedBranch(newValue, oldValue) {
       this.selectMapMarker(oldValue, false)
       this.selectMapMarker(newValue, true)
     }
   },
   methods: {
-    ...mapActions(['updateSelectedStore']),
+    ...mapActions(['updateSelectedBranch']),
     // -------------------
     // events
     // -------------------
     onMapMarkerClick(id) {
-      this.ignoreCenterOnSelectedStore = true
-      this.selectedStore = id
+      this.ignoreCenterOnSelectedBranch = true
+      this.selectedBranch = id
     },
     onMapMarkerMouseOver(id) {
       const marker = this.mapMarkers[id]
@@ -94,30 +94,30 @@ export default {
       }, 500)
     },
     addMapMarkers() {
-      // go through the stores list and add a map marker for each
+      // go through the branches list and add a map marker for each
       let markers = {}
-      for (let i = 0; i < this.stores.length; i++) {
+      for (let i = 0; i < this.branches.length; i++) {
         const marker = {}
-        marker.id = this.stores[i].id
-        marker.title = this.stores[i].displayName + '\n' + this.stores[i].address.address + '\n' +
-          this.stores[i].phone
+        marker.id = this.branches[i].id
+        marker.title = this.branches[i].displayName + '\n' + this.branches[i].address.address + '\n' +
+          this.branches[i].phone
         marker.animation = 4
         marker.position = {
-          lat: this.stores[i].geoPoint.latitude,
-          lng: this.stores[i].geoPoint.longitude
+          lat: this.branches[i].geoPoint.latitude,
+          lng: this.branches[i].geoPoint.longitude
         }
         marker.icon = {
           url: this.mapIcons.defaultIcon,
           scaledSize: this.mapMarkerIconSize
         }
-        markers[this.stores[i].id] = marker
+        markers[this.branches[i].id] = marker
       }
       this.mapMarkers = markers
     },
-    centerOnStore(location) {
+    centerOnBranch(location) {
       // will repositioned the map center to the specific location
-      if (this.ignoreCenterOnSelectedStore) {
-        this.ignoreCenterOnSelectedStore = false
+      if (this.ignoreCenterOnSelectedBranch) {
+        this.ignoreCenterOnSelectedBranch = false
       }
       else {
         if (location) {
@@ -126,10 +126,10 @@ export default {
       }
     },
     recenterMapLocation() {
-      // will recenter the map either to selected store if any
-      // or the selected location if no store is selected
-      if (this.selectedStore && this.mapMarkers && this.mapMarkers[this.selectedStore]) {
-        this.centerOnStore(this.mapMarkers[this.selectedStore].position)
+      // will recenter the map either to selected branch if any
+      // or the selected location if no branch is selected
+      if (this.selectedBranch && this.mapMarkers && this.mapMarkers[this.selectedBranch]) {
+        this.centerOnBranch(this.mapMarkers[this.selectedBranch].position)
       }
       else if (this.selectedLocation) {
         // this.updateMapCenter(this.selectedLocation)
@@ -137,7 +137,7 @@ export default {
           lat: this.selectedLocation.geoPoint.latitude,
           lng: this.selectedLocation.geoPoint.longitude
         }
-        this.centerOnStore(location)
+        this.centerOnBranch(location)
       }
     },
     selectMapMarker(id, isOn) {
@@ -150,8 +150,8 @@ export default {
         }
         this.mapMarkers[id].icon = icon
         if (isOn) {
-          const storeLocation = Object.assign({}, this.mapMarkers[id].position)
-          this.centerOnStore(storeLocation)
+          const branchLocation = Object.assign({}, this.mapMarkers[id].position)
+          this.centerOnBranch(branchLocation)
         }
       }
     }

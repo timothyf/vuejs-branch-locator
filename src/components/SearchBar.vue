@@ -1,32 +1,29 @@
 <template>
   <nav>
-    <img src="../../static/texture-image.jpg"
+    <!-- <img src="../../static/texture-image.jpg"
          srcset="../../static/texture-image@2x.jpg 2x,
                  ../../static/texture-image@3x.jpg 3x"
-         class="Texture-Image">
-    <div class="v-toolbar__content" style="height: 64px;">
-      <div>Branch Locator</div>
-    </div>
+         class="Texture-Image"> -->
+    <location-search></location-search>
   </nav>
 </template>
 
+<script>
+import LocationSearch from './LocationSearch'
+
+export default {
+  components: {
+    'location-search': LocationSearch
+  }
+}
+</script>
+
 <style>
   nav {
-    border: 1px solid red;
-    background-color: black !important;
-    color: rgba(0, 0, 0, .87);
-    width: 100%;
-    z-index: 2;
+    background-color: #313131 !important;
     color: white;
-    margin-top: 0px;
-    padding-right: 0px;
-    padding-left: 0px;
-    height: 195px;
-  }
-  .v-toolbar__content {
-    align-items: center;
-    display: flex;
-    padding: 0 24px;
+    height: 155px;
+    padding: 20px;
   }
   .Texture-Image {
     width: 1366px;

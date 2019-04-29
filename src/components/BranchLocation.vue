@@ -1,13 +1,13 @@
 <template>
-  <div class="store-item-card" :class="{isSelected: selectedStore === store.id}" @click.capture="onStoreClick(store.id)">
+  <div class="branch-location-card" :class="{isSelected: selectedBranch === branch.id}" @click.capture="onBranchClick(branch.id)">
     <h1>{{ index+1 }}</h1>
-    <div>{{store.displayName}}</div>
-    <div>{{ store.address.address}}</div>
-    <div>{{ store.address.city}}, {{store.address.state}} {{store.address.postalCode}}</div>
-    <div>
-      <span><a :href="'tel:'+ store.phone">{{ store.phone }}</a></span>
-      <span class="store-hours">{{ getStoreHoursDesc(store) }}</span>
-    </div>
+    <div class="branch-name">{{branch.displayName}}</div>
+    <div class="address-1">{{ branch.address.address}}</div>
+    <div class="address-2">{{ branch.address.city}}, {{branch.address.state}} {{branch.address.postalCode}}</div>
+    <hr/>
+    <div class="branch-phone"><a :href="'tel:'+ branch.phone">{{ branch.phone }}</a></div>
+    <div class="branch-hours">{{ getBranchHoursDesc(branch) }}</div>
+    <div class="icon-bar"></div>
   </div>
 </template>
 
@@ -17,27 +17,27 @@ import { mapActions } from 'vuex'
 
 export default {
   props: {
-    store: Object,
+    branch: Object,
     index: Number
   },
   computed: {
-    selectedStore: {
+    selectedBranch: {
       get() {
-        return this.$store.getters.selectedStore
+        return this.$store.getters.selectedBranch
       }
     }
   },
   methods: {
-    ...mapActions(['onStoreClick']),
-    getStoreHoursDesc(store) {
-      if (store.operationalHours.open24Hours) {
+    ...mapActions(['onBranchClick']),
+    getBranchHoursDesc(branch) {
+      if (branch.operationalHours.open24Hours) {
         return 'Open 24 hours';
-      } else if (store.operationalHours.todayHrs) {
-        return 'Open until: ' + moment(store.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
-      } else if (store.operationalHours.monToFriHrs) {
-        return 'Open until: ' + moment(store.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
+      } else if (branch.operationalHours.todayHrs) {
+        return 'Open until: ' + moment(branch.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
+      } else if (branch.operationalHours.monToFriHrs) {
+        return 'Open until: ' + moment(branch.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
       } else {
-        return '(call for store hours)';
+        return '(call for branch hours)';
       }
     }
   }
@@ -45,20 +45,96 @@ export default {
 </script>
 
 <style>
-  .store-hours {
-    padding-left: 20px;
-  }
-  .store-item-card {
+  .branch-location-card {
+    border: 1px solid red;
     background-color: #fff;
-    padding: 16px;
     width: 440px;
     height: 309px;
     margin: auto;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
-  .store-item-card.isSelected {
+  .branch-location-card.isSelected {
     border: 2px solid #5C6BC0;
     background-color: #BBDEFB;
+  }
+  .branch-location-card h1 {
+    margin-top: -35px;
+    width: 44px;
+    height: 42px;
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 42px;
+    font-weight: 300;
+    font-style: normal;
+    color: #e51b24;
+  }
+  .branch-name {
+    height: 16px;
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    color: #5b5b5b;
+  }
+  .address-1 {
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    height: 27px;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.69;
+    letter-spacing: normal;
+    color: #5b5b5b;
+  }
+  .address-2 {
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    height: 27px;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.69;
+    letter-spacing: normal;
+    color: #5b5b5b;
+  }
+  .branch-phone {
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #5b5b5b;
+  }
+  .branch-hours {
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #5b5b5b;
+  }
+  hr {
+    width: 75px;
+    height: 2px;
+    background-color: #e4e4e4;
+  }
+  .icon-bar {
+    width: 440px;
+    height: 50px;
+    background-color: #f7f7f7;
   }
 </style>
