@@ -1,12 +1,21 @@
 <template>
   <div class="branch-location-card" :class="{isSelected: selectedBranch === branch.id}" @click.capture="onBranchClick(branch.id)">
-    <h1>{{ index+1 }}</h1>
-    <div class="branch-name">{{branch.displayName}}</div>
-    <div class="address-1">{{ branch.address.address}}</div>
-    <div class="address-2">{{ branch.address.city}}, {{branch.address.state}} {{branch.address.postalCode}}</div>
-    <hr/>
-    <div class="branch-phone"><a :href="'tel:'+ branch.phone">{{ branch.phone }}</a></div>
-    <div class="branch-hours">{{ getBranchHoursDesc(branch) }}</div>
+    <div class="index">{{ index+1 }}</div>
+    <div class='indented'>
+      <div class="multi-item">
+        <div class="branch-name">{{branch.displayName}}</div>
+        <div class="branch-distance">0.7 miles</div>
+      </div>
+      <div class="address-1">{{ branch.address.address}}</div>
+      <div class="address-2">{{ branch.address.city}}, {{branch.address.state}} {{branch.address.postalCode}}</div>
+      <hr/>
+      <div class="branch-hours">{{ getBranchHoursDesc(branch) }}</div>
+      <div class="branch-email">email</div>
+      <div class="multi-item">
+        <div class="branch-phone"><a :href="'tel:'+ branch.phone">{{ branch.phone }}</a></div>
+        <div class="directions">Directions</div>
+      </div>
+    </div>
     <div class="icon-bar"></div>
   </div>
 </template>
@@ -46,7 +55,8 @@ export default {
 
 <style>
   .branch-location-card {
-    border: 1px solid red;
+    padding-top: 1px;
+    position: relative;
     background-color: #fff;
     width: 440px;
     height: 309px;
@@ -54,14 +64,10 @@ export default {
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .branch-location-card.isSelected {
-    border: 2px solid #5C6BC0;
-    background-color: #BBDEFB;
-  }
-  .branch-location-card h1 {
-    margin-top: -35px;
-    width: 44px;
-    height: 42px;
+  .branch-location-card .index {
+    position: absolute;
+    top: -30px;
+    left: 30px;
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 42px;
@@ -69,7 +75,17 @@ export default {
     font-style: normal;
     color: #e51b24;
   }
+  .indented {
+    margin-left: 30px;
+    margin-right: 22px;
+    margin-top: 30px;
+  }
+  .multi-item {
+    display: flex;
+    justify-content: space-between;
+  }
   .branch-name {
+    width: 280px;
     height: 16px;
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
@@ -80,6 +96,20 @@ export default {
     line-height: 1.14;
     letter-spacing: normal;
     color: #5b5b5b;
+  }
+  .branch-distance {
+    width: 90px;
+    height: 22px;
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    text-align: right;
+    color: #e51b24;
   }
   .address-1 {
     font-family: Graphik;
@@ -106,6 +136,8 @@ export default {
     color: #5b5b5b;
   }
   .branch-phone {
+    width: 250px;
+    height: 22px;
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
@@ -127,12 +159,43 @@ export default {
     letter-spacing: normal;
     color: #5b5b5b;
   }
+  .branch-email {
+    width: 250px;
+    height: 22px;
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    color: #5b5b5b;
+  }
+  .directions {
+    width: 90px;
+    height: 22px;
+    font-family: Graphik;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    text-align: right;
+    color: #e51b24;
+  }
   hr {
     width: 75px;
     height: 2px;
     background-color: #e4e4e4;
+    text-align: left;
+    margin-left: 0px;
   }
   .icon-bar {
+    position: absolute;
+    bottom: 0px;
     width: 440px;
     height: 50px;
     background-color: #f7f7f7;

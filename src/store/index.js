@@ -14,8 +14,8 @@ export default new Vuex.Store({
         availableLocations: {},
         branches: [],
         mapIcons: {
-          "defaultIcon":"https://s3.amazonaws.com/vuejsbranchlocator/location-pin-small.svg",
-          "selectedIcon":"http://maps.google.com/mapfiles/kml/paddle/red-circle.png"
+          "defaultIcon":"https://s3.amazonaws.com/vuejsbranchlocator/Location_Pin-Dark.svg",
+          "selectedIcon":"https://s3.amazonaws.com/vuejsbranchlocator/Location_Pin-Red.svg"
         },
         branchesDataUrl: '../../static/data/'
     },

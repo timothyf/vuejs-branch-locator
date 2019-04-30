@@ -1,6 +1,11 @@
 <template>
   <div id="map-container">
-    <googlemaps-map ref="map" class="map" :options="{styles: styles}" :center.sync="mapCenter" :zoom.sync="zoom">
+    <googlemaps-map ref="map"
+                    class="map"
+                    :options="{styles: styles,
+                               disableDefaultUI: true}"
+                    :center.sync="mapCenter"
+                    :zoom.sync="zoom">
       <googlemaps-marker v-for="marker in mapMarkers"
                          :key="marker.id"
                          :title="marker.title"
@@ -27,7 +32,7 @@ export default {
         lat: 0,
         lng: 0
       },
-      zoom: 11,
+      zoom: 12,
       mapMarkers: null,
       mapMarkerIconSize: null,
       ignoreCenterOnSelectedBranch: false,
@@ -64,9 +69,7 @@ export default {
   },
   methods: {
     ...mapActions(['updateSelectedBranch']),
-    // -------------------
-    // events
-    // -------------------
+
     onMapMarkerClick(id) {
       this.ignoreCenterOnSelectedBranch = true
       this.selectedBranch = id
@@ -89,7 +92,6 @@ export default {
       setTimeout(() => {
         this.mapCenter.lat = location.geoPoint.latitude
         this.mapCenter.lng = location.geoPoint.longitude
-        this.zoom = 11
         this.addMapMarkers()
       }, 500)
     },
@@ -158,16 +160,16 @@ export default {
   },
   created() {
     EventBus.$on('recenterMapLocation', () => {
-      this.recenterMapLocation()
+      this.recenterMapLocation();
     })
   },
   beforeMount() {
     if (this.selectedLocation.geoPoint) {
-      this.updateMapCenter(this.selectedLocation)
+      this.updateMapCenter(this.selectedLocation);
     }
   },
   googleMapsReady() {
-    this.mapMarkerIconSize = new window.google.maps.Size(40, 40)
+    this.mapMarkerIconSize = new window.google.maps.Size(40, 40);
   }
 }
 </script>

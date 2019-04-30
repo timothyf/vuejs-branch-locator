@@ -25,7 +25,6 @@ export default {
 }
 
 main {
-  border: 1px solid red;
   display: flex;
   flex: 1 0 auto;
 }
