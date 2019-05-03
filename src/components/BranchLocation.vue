@@ -9,14 +9,28 @@
       <div class="address-1">{{ branch.address.address}}</div>
       <div class="address-2">{{ branch.address.city}}, {{branch.address.state}} {{branch.address.postalCode}}</div>
       <hr/>
-      <div class="branch-hours">{{ getBranchHoursDesc(branch) }}</div>
-      <div class="branch-email">email</div>
+      <div class="branch-hours">
+        <img src="../../static/clock-small.svg" class="branch-icon">
+        {{ getBranchHoursDesc(branch) }}
+      </div>
+      <div class="branch-email">
+        <img src="../../static/email.svg" class="branch-icon">
+        email
+      </div>
       <div class="multi-item">
-        <div class="branch-phone"><a :href="'tel:'+ branch.phone">{{ branch.phone }}</a></div>
+        <div class="branch-phone">
+          <img src="../../static/phone.svg" class="branch-icon">
+          <a :href="'tel:'+ branch.phone">{{ branch.phone }}</a>
+        </div>
         <div class="directions">Directions</div>
       </div>
     </div>
-    <div class="icon-bar"></div>
+    <div class="icon-bar">
+      <img src="../../static/branch.svg" class="branch-icon">
+      <img src="../../static/in-store-branch.svg" class="branch-icon">
+      <img src="../../static/atm.svg" class="branch-icon">
+      <img src="../../static/currency.svg" class="branch-icon">
+    </div>
   </div>
 </template>
 
@@ -136,41 +150,43 @@ export default {
     color: #5b5b5b;
   }
   .branch-phone {
-    width: 250px;
-    height: 22px;
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.57;
-    letter-spacing: normal;
     color: #5b5b5b;
+    line-height: 1.57;
+  }
+  .branch-phone img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
   }
   .branch-hours {
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.57;
-    letter-spacing: normal;
     color: #5b5b5b;
+    line-height: 1.57;
+  }
+  .branch-hours img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
   }
   .branch-email {
-    width: 250px;
-    height: 22px;
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.57;
-    letter-spacing: normal;
     color: #5b5b5b;
+    line-height: 2;
+  }
+  .branch-email img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
   }
   .directions {
     width: 90px;
@@ -188,8 +204,6 @@ export default {
   }
   hr {
     width: 75px;
-    height: 2px;
-    background-color: #e4e4e4;
     text-align: left;
     margin-left: 0px;
   }
@@ -199,5 +213,13 @@ export default {
     width: 440px;
     height: 50px;
     background-color: #f7f7f7;
+  }
+  .branch-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .icon-bar .branch-icon {
+    margin-top: 20px;
+    margin-left: 20px;
   }
 </style>
