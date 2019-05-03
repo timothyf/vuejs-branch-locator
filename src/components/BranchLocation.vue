@@ -22,7 +22,9 @@
           <img src="../../static/phone.svg" class="branch-icon">
           <a :href="'tel:'+ branch.phone">{{ branch.phone }}</a>
         </div>
-        <div class="directions">Directions</div>
+        <div class="directions">
+          <a href="https://www.google.com/maps/dir/?api=1&orgin=Detroit@destination=Flint">Directions</a>
+      </div>
       </div>
     </div>
     <div class="icon-bar">
@@ -200,6 +202,8 @@ export default {
     line-height: 1.14;
     letter-spacing: normal;
     text-align: right;
+  }
+  .directions a, .directions a:visited {
     color: #e51b24;
   }
   hr {

@@ -1,5 +1,5 @@
 <template>
-  <div id="location-search">
+  <!-- <div id="location-search">
     <span>Your location:</span>
     <a @click="onEditSelectedLocation" href="#">{{ selectedLocation }}</a>
     <div class="location-edit" v-show="isSelectedLocationEdited">
@@ -13,80 +13,80 @@
                   class="inline-input">
       </v-combobox>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import {mapActions} from 'vuex'
-import dropdown from "./dropdown";
-
-export default {
-    data () {
-      return {
-        isSelectedLocationEdited: false,
-        editedLocation: null
-        // config: {
-        //   options: availableLocations,
-        //   placeholder: "Placeholder",
-        //   backgroundColor: "#cde4f5",
-        //   textColor: "black",
-        //   borderRadius: "1.5em",
-        //   border: "1px solid gray",
-        //   width: 180
-        // }
-      };
-    },
-    components: {
-      'vue-dropdown': dropdown
-    },
-    computed: {
-      selectedLocation: {
-          get() {
-            const location = this.$store.getters.selectedLocation;
-            return location.city + ', ' + location.state;
-          },
-          set(newValue) {
-            this.editedLocation = newValue;
-          }
-      },
-      menuLocations () {
-        return this.$store.getters.availableLocationsShort
-      }
-    },
-    methods: {
-      ...mapActions(['updateSelectedLocation']),
-
-      setNewSelectedOption(selectedOption) {
-        alert('set new');
-        this.config.placeholder = selectedOption.value;
-      },
-      onEditSelectedLocation () {
-        alert('onEditSelectedLocation');
-        this.isSelectedLocationEdited = !this.isSelectedLocationEdited
-        setTimeout(() => {
-          this.$refs.locationCombobox.focus()
-        }, 100);
-      },
-      onLocationChange () {
-        alert('onLocationChange');
-        if (this.editedLocation) {
-          const location = this.editedLocation.split(', ');
-          this.updateSelectedLocation({state: location[1], city: location[0].toUpperCase(), postalCode: ''});
-          this.resetComponentData();
-        }
-      },
-      onLocationBlur () {
-        if (this.isSelectedLocationEdited && !this.editedLocation) {
-          this.editedLocation = null;
-          this.isSelectedLocationEdited = false;
-        }
-      },
-      resetComponentData () {
-        this.editedLocation = null;
-        this.isSelectedLocationEdited = false;
-      }
-    }
-}
+// import {mapActions} from 'vuex'
+// import dropdown from "./dropdown";
+//
+// export default {
+//     data () {
+//       return {
+//         isSelectedLocationEdited: false,
+//         editedLocation: null
+//         // config: {
+//         //   options: availableLocations,
+//         //   placeholder: "Placeholder",
+//         //   backgroundColor: "#cde4f5",
+//         //   textColor: "black",
+//         //   borderRadius: "1.5em",
+//         //   border: "1px solid gray",
+//         //   width: 180
+//         // }
+//       };
+//     },
+//     components: {
+//       'vue-dropdown': dropdown
+//     },
+//     computed: {
+//       selectedLocation: {
+//           get() {
+//             const location = this.$store.getters.selectedLocation;
+//             return location.city + ', ' + location.state;
+//           },
+//           set(newValue) {
+//             this.editedLocation = newValue;
+//           }
+//       },
+//       menuLocations () {
+//         return this.$store.getters.availableLocationsShort
+//       }
+//     },
+//     methods: {
+//       ...mapActions(['updateSelectedLocation']),
+//
+//       setNewSelectedOption(selectedOption) {
+//         alert('set new');
+//         this.config.placeholder = selectedOption.value;
+//       },
+//       onEditSelectedLocation () {
+//         alert('onEditSelectedLocation');
+//         this.isSelectedLocationEdited = !this.isSelectedLocationEdited
+//         setTimeout(() => {
+//           this.$refs.locationCombobox.focus()
+//         }, 100);
+//       },
+//       onLocationChange () {
+//         alert('onLocationChange');
+//         if (this.editedLocation) {
+//           const location = this.editedLocation.split(', ');
+//           this.updateSelectedLocation({state: location[1], city: location[0].toUpperCase(), postalCode: ''});
+//           this.resetComponentData();
+//         }
+//       },
+//       onLocationBlur () {
+//         if (this.isSelectedLocationEdited && !this.editedLocation) {
+//           this.editedLocation = null;
+//           this.isSelectedLocationEdited = false;
+//         }
+//       },
+//       resetComponentData () {
+//         this.editedLocation = null;
+//         this.isSelectedLocationEdited = false;
+//       }
+//     }
+// }
 </script>
 
 <style>
