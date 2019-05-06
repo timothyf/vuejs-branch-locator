@@ -23,7 +23,7 @@
           <a :href="'tel:'+ branch.phone">{{ branch.phone }}</a>
         </div>
         <div class="directions">
-          <a href="https://www.google.com/maps/dir/?api=1&orgin=Detroit@destination=Flint">Directions</a>
+          <a target="_blank" :href="getDirectionsUrl()">Directions</a>
       </div>
       </div>
     </div>
@@ -43,7 +43,8 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      distance: ""
+      distance: "",
+      location: ""
     }
   },
   props: {
@@ -62,26 +63,32 @@ export default {
   },
   methods: {
     ...mapActions(['onBranchClick']),
-    getBranchHoursDesc(branch) {
-      if (branch.operationalHours.open24Hours) {
+    getBranchHoursDesc() {
+      if (this.branch.operationalHours.open24Hours) {
         return 'Open 24 hours';
-      } else if (branch.operationalHours.todayHrs) {
-        return 'Open until: ' + moment(branch.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
-      } else if (branch.operationalHours.monToFriHrs) {
-        return 'Open until: ' + moment(branch.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
+      } else if (this.branch.operationalHours.todayHrs) {
+        return 'Open until: ' + moment(this.branch.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
+      } else if (this.branch.operationalHours.monToFriHrs) {
+        return 'Open until: ' + moment(this.branch.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
       } else {
         return '(call for branch hours)';
       }
     },
+    getDirectionsUrl() {
+      let baseDirectionsUrl = "https://www.google.com/maps/dir/?api=1";
+      var destination = "&destination=" + this.branch.geoPoint.lat + "%2C" + this.branch.geoPoint.lng;
+      return baseDirectionsUrl + destination;
+    },
     getCurrentLocation() {
+      var that = this;
       return new Promise(function(resolve, reject) {
         if (navigator.geolocation) {
-          var that = this;
           navigator.geolocation.getCurrentPosition(function(position) {
             var location = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
+            that.location = location;
             resolve(location);
           }, function() {
             console.log("Error getting current location");
