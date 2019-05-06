@@ -8,22 +8,19 @@ import router from './router'
 import store from './store'
 
 Vue.use(VueGoogleMaps, {
-    load: {
-        apiKey: process.env.GOOGLE_API_KEY,
-        libraries: ['places'],
-        useBetaRenderer: false
-    }
+  load: {
+    apiKey: process.env.GOOGLE_API_KEY,
+    libraries: ['places'],
+    useBetaRenderer: false
+  }
 })
 
 Vue.config.productionTip = false
 
 new Vue({
-    el: '#app',
-    router,
-    store,
-    components: { App },
-    template: '<App/>',
-    created () {
-      this.$store.dispatch('fetchCities')
-    }
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
 })

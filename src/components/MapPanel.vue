@@ -82,17 +82,18 @@ export default {
       }, 300)
     },
     onMapMarkerMouseOut(id) {
-      const marker = this.mapMarkers[id]
-      marker.animation = 4
+      const marker = this.mapMarkers[id];
+      marker.animation = 4;
     },
 
     updateMapCenter(location) {
       // to update the map center we need some time delay, otherwise the change wouldn't work
       this.mapMarkers = null
+      console.log('lat, lng = ' + JSON.stringify(location));
       setTimeout(() => {
-        this.mapCenter.lat = location.geoPoint.latitude
-        this.mapCenter.lng = location.geoPoint.longitude
-        this.addMapMarkers()
+        this.mapCenter.lat = location.lat;
+        this.mapCenter.lng = location.lng;
+        this.addMapMarkers();
       }, 500)
     },
     addMapMarkers() {
@@ -100,10 +101,10 @@ export default {
       let markers = {}
       for (let i = 0; i < this.branches.length; i++) {
         const marker = {}
-        marker.id = this.branches[i].id
+        marker.id = this.branches[i].id;
         marker.title = this.branches[i].displayName + '\n' + this.branches[i].address.address + '\n' +
-          this.branches[i].phone
-        marker.animation = 4
+          this.branches[i].phone;
+        marker.animation = 4;
         marker.position = {
           lat: this.branches[i].geoPoint.latitude,
           lng: this.branches[i].geoPoint.longitude

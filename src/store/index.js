@@ -85,6 +85,9 @@ export default new Vuex.Store({
         updateSelectedBranch({commit}, payload) {
             commit('SET_SELECTED_BRANCH', payload)
         },
+        setSelectedLocation({commit, state}, payload) {
+          commit('SET_SELECTED_LOCATION', payload);
+        },
         updateSelectedLocation({commit, state}, payload) {
             // payload: location object {state: 'FL', city: 'Orlando', postalCode: '32821'}
             if (payload.state in state.availableLocations && payload.city in state.availableLocations[payload.state]) {
@@ -99,20 +102,28 @@ export default new Vuex.Store({
                         const branches = data;
                         commit('SET_BRANCHES', branches);
                       }
-                  })
+                  });
             }
             else {
-              commit('SET_BRANCHES', [])
+              commit('SET_BRANCHES', []);
             }
         },
         fetchCities({commit, dispatch, state}) {
-          return client
-            .fetchCities()
+          return client.fetchCities()
                 .then(data => {
-                    commit('SET_AVAILABLE_LOCATIONS', data)
-                    dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'})
-                })
-
+                    commit('SET_AVAILABLE_LOCATIONS', data);
+                    dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'});
+                });
+        },
+        fetchBranches({commit, dispatch, state}, payload) {
+          var location = payload;
+          return client.fetchBranches(location)
+                .then(data => {
+                  if (data) {
+                    const branches = data;
+                    commit('SET_BRANCHES', branches);
+                  }
+                });
         }
     }
 })

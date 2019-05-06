@@ -20,7 +20,7 @@
         <div id="left-content">
           <div id="address-search">
             <input v-model="currentAddress" placeholder="City, State / Zipcode">
-            <button id="search-btn">
+            <button id="search-btn" @click="handleSearch">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                   <path class="search-btn-icon" d="M8 4l8 8-.727.727L8 5.455.727 12.727 0 12z"/>
               </svg>
@@ -53,34 +53,46 @@
           </div>
         </div>
       </div>
-      <div id="service-filters">
+      <!-- <div id="service-filters">
         <label>Filter by Bank Services</label>
         <div id="expander"></div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
 
 <script>
-import LocationSearch from './LocationSearch'
+import {mapActions} from 'vuex';
+import LocationSearch from './LocationSearch';
 
 export default {
   data() {
     return {
-      currentLocation: null,
       currentAddress: ""
     }
   },
+  computed: {
+    selectedLocation() {
+      return this.$store.getters.selectedLocation
+    }
+  },
   methods: {
+    ...mapActions(['setSelectedLocation']),
+
+    handleSearch() {
+      this.setSelectedLocation({"lat": 28.536694, "lng": -81.380851});
+      this.$store.dispatch('fetchBranches', 'orlando');
+    },
     getCurrentLocation() {
       if (navigator.geolocation) {
         var that = this;
         navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
+          var location = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
-          that.currentLocation = pos;
+          that.currentLocation = location;
+          that.setSelectedLocation(location);
           that.getAddress();
         }, function() {
           console.log("Error getting current location");
@@ -94,7 +106,7 @@ export default {
     getAddress() {
       var geocoder = new google.maps.Geocoder;
       var that = this;
-      geocoder.geocode({'location': this.currentLocation}, function(results, status) {
+      geocoder.geocode({'location': this.selectedLocation}, function(results, status) {
         if (status === 'OK') {
           if (results[0]) {
             that.currentAddress = results[0].formatted_address;
