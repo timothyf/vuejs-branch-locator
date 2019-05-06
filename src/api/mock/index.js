@@ -18,6 +18,6 @@ export default {
           .then(function(response) {
             resolve(response.json());
           });
-    })
+    });
   }
 }

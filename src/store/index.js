@@ -88,33 +88,6 @@ export default new Vuex.Store({
         setSelectedLocation({commit, state}, payload) {
           commit('SET_SELECTED_LOCATION', payload);
         },
-        updateSelectedLocation({commit, state}, payload) {
-            // payload: location object {state: 'FL', city: 'Orlando', postalCode: '32821'}
-            if (payload.state in state.availableLocations && payload.city in state.availableLocations[payload.state]) {
-              const location = state.availableLocations[payload.state][payload.city]
-              commit('SET_SELECTED_LOCATION', location)
-              // fetch the corresponding branches
-              // read branches data from local json file
-              Vue.http.get(state.branchesDataUrl + location.dataUrl)
-                  .then(response => response.json())
-                  .then(data => {
-                      if (data) {
-                        const branches = data;
-                        commit('SET_BRANCHES', branches);
-                      }
-                  });
-            }
-            else {
-              commit('SET_BRANCHES', []);
-            }
-        },
-        fetchCities({commit, dispatch, state}) {
-          return client.fetchCities()
-                .then(data => {
-                    commit('SET_AVAILABLE_LOCATIONS', data);
-                    dispatch('updateSelectedLocation', {state: 'FL', city: 'ORLANDO', postalCode: '32821'});
-                });
-        },
         fetchBranches({commit, dispatch, state}, payload) {
           var location = payload;
           return client.fetchBranches(location)

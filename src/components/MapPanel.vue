@@ -106,8 +106,8 @@ export default {
           this.branches[i].phone;
         marker.animation = 4;
         marker.position = {
-          lat: this.branches[i].geoPoint.latitude,
-          lng: this.branches[i].geoPoint.longitude
+          lat: this.branches[i].geoPoint.lat,
+          lng: this.branches[i].geoPoint.lng
         }
         marker.icon = {
           url: this.mapIcons.defaultIcon,
@@ -137,8 +137,8 @@ export default {
       else if (this.selectedLocation) {
         // this.updateMapCenter(this.selectedLocation)
         const location = {
-          lat: this.selectedLocation.geoPoint.latitude,
-          lng: this.selectedLocation.geoPoint.longitude
+          lat: this.selectedLocation.geoPoint.lat,
+          lng: this.selectedLocation.geoPoint.lng
         }
         this.centerOnBranch(location)
       }

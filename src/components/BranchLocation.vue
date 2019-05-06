@@ -4,7 +4,7 @@
     <div class='indented'>
       <div class="multi-item">
         <div class="branch-name">{{branch.displayName}}</div>
-        <div class="branch-distance">0.7 miles</div>
+        <div class="branch-distance">{{ distance }}</div>
       </div>
       <div class="address-1">{{ branch.address.address}}</div>
       <div class="address-2">{{ branch.address.city}}, {{branch.address.state}} {{branch.address.postalCode}}</div>
@@ -41,6 +41,11 @@ import moment from 'moment'
 import { mapActions } from 'vuex'
 
 export default {
+  data() {
+    return {
+      distance: ""
+    }
+  },
   props: {
     branch: Object,
     index: Number
@@ -51,6 +56,9 @@ export default {
         return this.$store.getters.selectedBranch
       }
     }
+  },
+  beforeMount(){
+     this.getDistance();
   },
   methods: {
     ...mapActions(['onBranchClick']),
@@ -64,6 +72,47 @@ export default {
       } else {
         return '(call for branch hours)';
       }
+    },
+    getCurrentLocation() {
+      return new Promise(function(resolve, reject) {
+        if (navigator.geolocation) {
+          var that = this;
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var location = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            resolve(location);
+          }, function() {
+            console.log("Error getting current location");
+            reject();
+          });
+        }
+        else {
+          // Browser doesn't support Geolocation
+          console.log("Browser doesn't support GeoLocation");
+          reject();
+        }
+      });
+    },
+    getDistance() {
+      var that = this;
+      this.getCurrentLocation().then(function(location) {
+        let origin = location;
+        let destination = new google.maps.LatLng(42.33143, -83.04575);
+        var service = new google.maps.DistanceMatrixService();
+        console.log(JSON.stringify(that.branch.geoPoint));
+        service.getDistanceMatrix(
+          {
+            origins: [origin],
+            destinations: [that.branch.geoPoint],
+            travelMode: 'DRIVING',
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+          }, function(response, status) {
+            var distance = (response.rows[0].elements[0].distance.text).replace(/['"]+/g, '');
+            that.distance = distance;
+        });
+      });
     }
   }
 }

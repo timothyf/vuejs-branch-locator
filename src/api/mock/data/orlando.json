@@ -11,8 +11,8 @@
     "phone": "407-354-5665",
     "displayName": "Orlando Supercenter",
     "geoPoint": {
-      "latitude": 28.447665,
-      "longitude": -81.424513
+      "lat": 28.447665,
+      "lng": -81.424513
     },
     "operationalHours": {
       "open24Hours": true,
@@ -55,8 +55,8 @@
     "phone": "407-351-2229",
     "displayName": "Orlando Supercenter",
     "geoPoint": {
-      "latitude": 28.43987,
-      "longitude": -81.476496
+      "lat": 28.43987,
+      "lng": -81.476496
     },
     "operationalHours": {
       "open24Hours": true,
