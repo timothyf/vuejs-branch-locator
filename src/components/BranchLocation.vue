@@ -1,26 +1,22 @@
 <template>
-  <div class="branch-location-card" :class="{isSelected: selectedBranch === branch.id}" @click.capture="onBranchClick(branch.id)">
+  <div class="branch-location-card" :class="{isSelected: selectedBranch === branch.branchInfo.branchId}" @click.capture="onBranchClick(branch.branchInfo.branchId)">
     <div class="index">{{ index+1 }}</div>
     <div class='indented'>
       <div class="multi-item">
-        <div class="branch-name">{{branch.displayName}}</div>
+        <div class="branch-name">{{branch.branchInfo.branchName}}</div>
         <div class="branch-distance">{{ distance }}</div>
       </div>
-      <div class="address-1">{{ branch.address.address}}</div>
-      <div class="address-2">{{ branch.address.city}}, {{branch.address.state}} {{branch.address.postalCode}}</div>
+      <div class="address-1">{{ branch.branchInfo.address.addressLine[0]}}</div>
+      <div class="address-2">{{ branch.branchInfo.address.city}}, {{branch.branchInfo.address.state}} {{branch.branchInfo.address.zipCode}}</div>
       <hr/>
-      <div class="branch-hours">
+      <!-- <div class="branch-hours">
         <img src="../../static/clock-small.svg" class="branch-icon">
         {{ getBranchHoursDesc(branch) }}
-      </div>
-      <div class="branch-email">
-        <img src="../../static/email.svg" class="branch-icon">
-        email
-      </div>
+      </div> -->
       <div class="multi-item">
         <div class="branch-phone">
           <img src="../../static/phone.svg" class="branch-icon">
-          <a :href="'tel:'+ branch.phone">{{ branch.phone }}</a>
+          <a :href="'tel:'+ branch.branchInfo.phone">{{ branch.branchInfo.phone }}</a>
         </div>
         <div class="directions">
           <a target="_blank" :href="getDirectionsUrl()">Directions</a>
@@ -39,6 +35,8 @@
 <script>
 import moment from 'moment'
 import { mapActions } from 'vuex'
+const config = require('../../config')
+
 
 export default {
   data() {
@@ -63,21 +61,20 @@ export default {
   },
   methods: {
     ...mapActions(['onBranchClick']),
-    getBranchHoursDesc() {
-      if (this.branch.operationalHours.open24Hours) {
-        return 'Open 24 hours';
-      } else if (this.branch.operationalHours.todayHrs) {
-        return 'Open until: ' + moment(this.branch.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
-      } else if (this.branch.operationalHours.monToFriHrs) {
-        return 'Open until: ' + moment(this.branch.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
-      } else {
-        return '(call for branch hours)';
-      }
-    },
+    // getBranchHoursDesc() {
+    //   if (this.branch.operationalHours.open24Hours) {
+    //     return 'Open 24 hours';
+    //   } else if (this.branch.operationalHours.todayHrs) {
+    //     return 'Open until: ' + moment(this.branch.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
+    //   } else if (this.branch.operationalHours.monToFriHrs) {
+    //     return 'Open until: ' + moment(this.branch.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
+    //   } else {
+    //     return '(call for branch hours)';
+    //   }
+    // },
     getDirectionsUrl() {
-      let baseDirectionsUrl = "https://www.google.com/maps/dir/?api=1";
-      var destination = "&destination=" + this.branch.geoPoint.lat + "%2C" + this.branch.geoPoint.lng;
-      return baseDirectionsUrl + destination;
+      var destination = "&destination=" + this.branch.branchInfo.latitude + "%2C" + this.branch.branchInfo.longitude;
+      return process.env.DIRECTIONS_BASE_URL + destination;
     },
     getCurrentLocation() {
       var that = this;
@@ -106,13 +103,14 @@ export default {
       var that = this;
       this.getCurrentLocation().then(function(location) {
         let origin = location;
-        let destination = new google.maps.LatLng(42.33143, -83.04575);
         var service = new google.maps.DistanceMatrixService();
-        console.log(JSON.stringify(that.branch.geoPoint));
+        var destination = {};
+        destination.lat = that.branch.branchInfo.latitude;
+        destination.lng = that.branch.branchInfo.longitude;
         service.getDistanceMatrix(
           {
             origins: [origin],
-            destinations: [that.branch.geoPoint],
+            destinations: [destination],
             travelMode: 'DRIVING',
             unitSystem: google.maps.UnitSystem.IMPERIAL,
           }, function(response, status) {

@@ -32,7 +32,7 @@ export default {
         lat: 0,
         lng: 0
       },
-      zoom: 12,
+      zoom: 11,
       mapMarkers: null,
       mapMarkerIconSize: null,
       ignoreCenterOnSelectedBranch: false,
@@ -53,9 +53,6 @@ export default {
     },
     branches() {
       return this.$store.getters.branches
-    },
-    mapIcons() {
-      return this.$store.getters.mapIcons
     }
   },
   watch: {
@@ -89,7 +86,6 @@ export default {
     updateMapCenter(location) {
       // to update the map center we need some time delay, otherwise the change wouldn't work
       this.mapMarkers = null
-      console.log('lat, lng = ' + JSON.stringify(location));
       setTimeout(() => {
         this.mapCenter.lat = location.lat;
         this.mapCenter.lng = location.lng;
@@ -101,19 +97,19 @@ export default {
       let markers = {}
       for (let i = 0; i < this.branches.length; i++) {
         const marker = {}
-        marker.id = this.branches[i].id;
-        marker.title = this.branches[i].displayName + '\n' + this.branches[i].address.address + '\n' +
-          this.branches[i].phone;
+        marker.id = this.branches[i].branchInfo.branchId;
+        marker.title = this.branches[i].branchInfo.branchName + '\n' + this.branches[i].branchInfo.address.addressLine[0] + '\n' +
+          this.branches[i].branchInfo.phone;
         marker.animation = 4;
         marker.position = {
-          lat: this.branches[i].geoPoint.lat,
-          lng: this.branches[i].geoPoint.lng
+          lat: this.branches[i].branchInfo.latitude,
+          lng: this.branches[i].branchInfo.longitude
         }
         marker.icon = {
-          url: this.mapIcons.defaultIcon,
+          url: process.env.DEFAULT_MAP_ICON,
           scaledSize: this.mapMarkerIconSize
         }
-        markers[this.branches[i].id] = marker
+        markers[this.branches[i].branchInfo.branchId] = marker
       }
       this.mapMarkers = markers
     },
@@ -137,8 +133,8 @@ export default {
       else if (this.selectedLocation) {
         // this.updateMapCenter(this.selectedLocation)
         const location = {
-          lat: this.selectedLocation.geoPoint.lat,
-          lng: this.selectedLocation.geoPoint.lng
+          lat: this.selectedLocation.branchInfo.latitude,
+          lng: this.selectedLocation.branchInfo.longitude
         }
         this.centerOnBranch(location)
       }
@@ -146,7 +142,7 @@ export default {
     selectMapMarker(id, isOn) {
       // will make the specified id marker either heilighted or not
       if (this.mapMarkers && this.mapMarkers[id]) {
-        const url = isOn ? this.mapIcons.selectedIcon : this.mapIcons.defaultIcon
+        const url = isOn ? process.env.SELECTED_MAP_ICON : process.env.DEFAULT_MAP_ICON
         const icon = {
           url: url,
           scaledSize: this.mapMarkerIconSize

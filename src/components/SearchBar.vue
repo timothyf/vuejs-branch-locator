@@ -63,7 +63,6 @@
 
 <script>
 import {mapActions} from 'vuex';
-import LocationSearch from './LocationSearch';
 
 export default {
   data() {
@@ -80,8 +79,8 @@ export default {
     ...mapActions(['setSelectedLocation']),
 
     handleSearch() {
-      this.setSelectedLocation({"lat": 28.536694, "lng": -81.380851});
-      this.$store.dispatch('fetchBranches', 'orlando');
+      this.setSelectedLocation({"lat": 47.260861, "lng": -122.443224});
+      this.$store.dispatch('fetchBranches', 'branch_data');
     },
     getCurrentLocation() {
       if (navigator.geolocation) {
@@ -110,7 +109,6 @@ export default {
         if (status === 'OK') {
           if (results[0]) {
             that.currentAddress = results[0].formatted_address;
-            console.log("Address = " + results[0].formatted_address);
           }
           else {
             console.log('No results found');
