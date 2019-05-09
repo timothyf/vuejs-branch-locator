@@ -24,10 +24,10 @@
       </div>
     </div>
     <div class="icon-bar">
-      <img src="../../static/branch.svg" class="branch-icon">
-      <img src="../../static/in-store-branch.svg" class="branch-icon">
-      <img src="../../static/atm.svg" class="branch-icon">
-      <img src="../../static/currency.svg" class="branch-icon">
+      <img v-if="branch.services.branch" src="../../static/branch.svg" class="branch-icon" alt="Branch Location">
+      <img v-if="branch.services.inStoreBranch" src="../../static/in-store-branch.svg" class="branch-icon" alt="In-store Branch Location">
+      <img v-if="branch.services.atm" src="../../static/atm.svg" class="branch-icon" alt="Onsite ATM">
+      <img v-if="branch.services.currency" src="../../static/currency.svg" class="branch-icon" alt="Foreign Currency Exchange">
     </div>
   </div>
 </template>

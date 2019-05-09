@@ -44,10 +44,10 @@
           <div id="radius-filter">
             <label>Distance</label><br/>
             <div class="select">
-              <select id="radius-value">
-                <option>10 miles</option>
-                <option>20 miles</option>
-                <option>50 miles</option>
+              <select id="radius-value" @change="onChangeSearchRadius($event)">
+                <option value="10">10 miles</option>
+                <option value="20">20 miles</option>
+                <option value="50">50 miles</option>
               </select>
             </div>
           </div>
@@ -62,25 +62,58 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
-
 export default {
   data() {
     return {
-      currentAddress: ""
+      currentAddress: "",
+      searchRadius: 10
     }
   },
   computed: {
-    selectedLocation() {
-      return this.$store.getters.selectedLocation
+    selectedLocation: {
+      get: function() {
+        return this.$store.getters.selectedLocation
+      },
+      set: function(location) {
+        this.$store.dispatch('setSelectedLocation', location);
+      }
     }
   },
+  beforeMount(){
+     this.currentAddress = "253 S 4th St, Tacoma, WA 98402, USA";
+  },
   methods: {
-    ...mapActions(['setSelectedLocation']),
-
+    onChangeSearchRadius(event) {
+        this.searchRadius = event.target.value;
+    },
     handleSearch() {
-      this.setSelectedLocation({"lat": 47.260861, "lng": -122.443224});
-      this.$store.dispatch('fetchBranches', 'branch_data');
+      // get input search param
+      // convert search param to geocoords
+      var that = this;
+      var searchParams = {};
+      searchParams.location = {};
+      this.geoCodeAddress(this.currentAddress).then(function(location) {
+        searchParams.location.lat = location.lat();
+        searchParams.location.lng = location.lng();
+        searchParams.searchRadius = that.searchRadius;
+        that.$store.dispatch('fetchBranches', searchParams);
+      });
+    },
+    // get geocoords for address passed in
+    geoCodeAddress(address) {
+      var that = this;
+      return new Promise(function(resolve, reject) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resolve(results[0].geometry.location);
+          }
+          else {
+            console.log('Geocode was not successful for the following reason: ' + status);
+            reject();
+          }
+        });
+      });
     },
     getCurrentLocation() {
       if (navigator.geolocation) {
@@ -91,8 +124,8 @@ export default {
             lng: position.coords.longitude
           };
           that.currentLocation = location;
-          that.setSelectedLocation(location);
-          that.getAddress();
+          that.selectedLocation = location;
+          that.getAddress(location);
         }, function() {
           console.log("Error getting current location");
         });
@@ -102,10 +135,12 @@ export default {
         console.log("Browser doesn't support GeoLocation");
       }
     },
-    getAddress() {
+    // gets address that coresponds to geocoordinates passed in as location
+    // sets current address field to be that address
+    getAddress(location) {
       var geocoder = new google.maps.Geocoder;
       var that = this;
-      geocoder.geocode({'location': this.selectedLocation}, function(results, status) {
+      geocoder.geocode({'location': location}, function(results, status) {
         if (status === 'OK') {
           if (results[0]) {
             that.currentAddress = results[0].formatted_address;

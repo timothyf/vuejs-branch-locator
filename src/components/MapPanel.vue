@@ -93,7 +93,6 @@ export default {
       }, 500)
     },
     addMapMarkers() {
-      // go through the branches list and add a map marker for each
       let markers = {}
       for (let i = 0; i < this.branches.length; i++) {
         const marker = {}
@@ -159,11 +158,6 @@ export default {
     EventBus.$on('recenterMapLocation', () => {
       this.recenterMapLocation();
     })
-  },
-  beforeMount() {
-    if (this.selectedLocation.geoPoint) {
-      this.updateMapCenter(this.selectedLocation);
-    }
   },
   googleMapsReady() {
     this.mapMarkerIconSize = new window.google.maps.Size(40, 40);
