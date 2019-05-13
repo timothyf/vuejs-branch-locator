@@ -1,22 +1,22 @@
 <template>
-  <div class="mortgage-consultant-card" :class="{isSelected: selectedConsultant === consultant.field_nmls}" @click.capture="onConsultantClick(consultant.field_nmls)">
+  <div class="person-card" :class="{isSelected: selectedPerson === person.field_nmls}" @click.capture="onPersonClick(person.field_nmls)">
     <div class="index">{{ index+1 }}</div>
     <div class='indented'>
       <div class="multi-item">
-        <div class="consultant-name">{{consultant.title}}</div>
-        <div class="consultant-distance">{{ distance }}</div>
+        <div class="person-name">{{person.title}}</div>
+        <div class="person-distance">{{ distance }}</div>
       </div>
-      <div class="address-1">{{ consultant.field_primary_address_export.address.address_line1}}</div>
-      <div class="address-2">{{ consultant.field_primary_address_export.address.city}}, {{consultant.field_primary_address_export.address.state}} {{consultant.field_primary_address_export.address.zipCode}}</div>
+      <div class="address-1">{{ person.field_primary_address_export.address.address_line1}}</div>
+      <div class="address-2">{{ person.field_primary_address_export.address.city}}, {{person.field_primary_address_export.address.state}} {{person.field_primary_address_export.address.zipCode}}</div>
       <hr/>
-      <!-- <div class="consultant-hours">
+      <!-- <div class="person-hours">
         <img src="../../static/clock-small.svg" class="branch-icon">
-        {{ getConsultantHoursDesc(consultant) }}
+        {{ getPersonHoursDesc(person) }}
       </div> -->
       <div class="multi-item">
-        <div class="consultant-phone">
+        <div class="person-phone">
           <img src="../../static/phone.svg" class="branch-icon">
-          <a :href="'tel:'+ consultant.field_mc_phone">{{ consultant.field_mc_phone }}</a>
+          <a :href="'tel:'+ person.field_mc_phone">{{ person.field_mc_phone }}</a>
         </div>
         <div class="directions">
           <a target="_blank" :href="getDirectionsUrl()">Directions</a>
@@ -37,13 +37,13 @@ export default {
     }
   },
   props: {
-    consultant: Object,
+    person: Object,
     index: Number
   },
   computed: {
-    selectedConsultant: {
+    selectedPerson: {
       get() {
-        return this.$store.getters.selectedConsultant
+        return this.$store.getters.selectedPerson
       }
     }
   },
@@ -51,22 +51,22 @@ export default {
      this.getDistance();
   },
   methods: {
-    // getConsultantHoursDesc() {
-    //   if (this.consultant.operationalHours.open24Hours) {
+    // getPersonHoursDesc() {
+    //   if (this.person.operationalHours.open24Hours) {
     //     return 'Open 24 hours';
-    //   } else if (this.consultant.operationalHours.todayHrs) {
-    //     return 'Open until: ' + moment(this.consultant.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
-    //   } else if (this.consultant.operationalHours.monToFriHrs) {
-    //     return 'Open until: ' + moment(this.consultant.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
+    //   } else if (this.person.operationalHours.todayHrs) {
+    //     return 'Open until: ' + moment(this.person.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
+    //   } else if (this.person.operationalHours.monToFriHrs) {
+    //     return 'Open until: ' + moment(this.person.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
     //   } else {
-    //     return '(call for consultant hours)';
+    //     return '(call for person hours)';
     //   }
     // },
-    onConsultantClick(consultantId) {
-      this.$store.dispatch('updateSelectedConsultant', consultantId);
+    onPersonClick(personId) {
+      this.$store.dispatch('setSelectedPerson', personId);
     },
     getDirectionsUrl() {
-      var destination = "&destination=" + this.consultant.field_primary_address_export.geocoordinates.latitude + "%2C" + this.consultant.field_primary_address_export.geocoordinates.longitude;
+      var destination = "&destination=" + this.person.field_primary_address_export.geocoordinates.latitude + "%2C" + this.person.field_primary_address_export.geocoordinates.longitude;
       return process.env.DIRECTIONS_BASE_URL + destination;
     },
     getCurrentLocation() {
@@ -98,8 +98,8 @@ export default {
         let origin = location;
         var service = new google.maps.DistanceMatrixService();
         var destination = {};
-        destination.lat = that.consultant.field_primary_address_export.geocoordinates.latitude;
-        destination.lng = that.consultant.field_primary_address_export.geocoordinates.longitude;
+        destination.lat = that.person.field_primary_address_export.geocoordinates.latitude;
+        destination.lng = that.person.field_primary_address_export.geocoordinates.longitude;
         service.getDistanceMatrix(
           {
             origins: [origin],
@@ -117,7 +117,7 @@ export default {
 </script>
 
 <style>
-  .mortgage-consultant-card {
+  .person-card {
     padding-top: 1px;
     position: relative;
     background-color: #fff;
@@ -127,7 +127,7 @@ export default {
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .mortgage-consultant-card .index {
+  .person-card .index {
     position: absolute;
     top: -30px;
     left: 30px;
@@ -147,7 +147,7 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-  .consultant-name {
+  .person-name {
     width: 280px;
     height: 16px;
     font-family: Graphik;
@@ -160,7 +160,7 @@ export default {
     letter-spacing: normal;
     color: #5b5b5b;
   }
-  .consultant-distance {
+  .person-distance {
     width: 90px;
     height: 22px;
     font-family: Graphik;
@@ -198,40 +198,40 @@ export default {
     letter-spacing: normal;
     color: #5b5b5b;
   }
-  .consultant-phone {
+  .person-phone {
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #5b5b5b;
     line-height: 1.57;
   }
-  .consultant-phone img {
+  .person-phone img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
     vertical-align: middle;
   }
-  .consultant-hours {
+  .person-hours {
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #5b5b5b;
     line-height: 1.57;
   }
-  .consultant-hours img {
+  .person-hours img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
     vertical-align: middle;
   }
-  .consultant-email {
+  .person-email {
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #5b5b5b;
     line-height: 2;
   }
-  .consultant-email img {
+  .person-email img {
     width: 20px;
     height: 20px;
     margin-right: 10px;

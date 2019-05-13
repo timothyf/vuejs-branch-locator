@@ -7,16 +7,30 @@
                      v-bind:key="branch.id"></branch-location>
 
     <mortgage-consultant v-if="searchType == 'Mortgage Consultant'"
-                         v-for="(consultant, index) in mortgageConsultants"
-                         v-bind:consultant="consultant"
+                         v-for="(person, index) in mortgageConsultants"
+                         v-bind:person="person"
                          :index="index"
-                         v-bind:key="consultant.id"></mortgage-consultant>
+                         v-bind:key="person.id"></mortgage-consultant>
+
+   <private-banker v-if="searchType == 'Private Banker'"
+                   v-for="(person, index) in privateBankers"
+                   v-bind:person="person"
+                   :index="index"
+                   v-bind:key="person.id"></private-banker>
+
+    <relationship-manager v-if="searchType == 'Relationship Manager'"
+                          v-for="(person, index) in relationshipManagers"
+                          v-bind:person="person"
+                          :index="index"
+                          v-bind:key="person.id"></relationship-manager>
   </div>
 </template>
 
 <script>
 import BranchLocation from './BranchLocation'
 import MortgageConsultant from './MortgageConsultant'
+import PrivateBanker from './PrivateBanker'
+import RelationshipManager from './RelationshipManager'
 export default {
   data() {
     return {
@@ -25,7 +39,9 @@ export default {
   },
   components: {
     'branch-location': BranchLocation,
-    'mortgage-consultant': MortgageConsultant
+    'mortgage-consultant': MortgageConsultant,
+    'private-banker': PrivateBanker,
+    'relationship-manager': RelationshipManager
   },
   computed: {
     selectedBranch: {
@@ -49,6 +65,12 @@ export default {
     },
     mortgageConsultants () {
       return this.$store.getters.mortgageConsultants;
+    },
+    privateBankers () {
+      return this.$store.getters.privateBankers;
+    },
+    relationshipManagers () {
+      return this.$store.getters.relationshipManagers;
     }
   },
   methods: {

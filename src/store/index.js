@@ -11,6 +11,7 @@ export default new Vuex.Store({
         searchType: 'Branch',
         selectedLocation: {},
         selectedBranch: null,
+        selectedPerson: null,
         branches: [],
         mortgageConsultants: [],
         relationshipManagers: [],
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         },
         selectedBranch (state) {
             return state.selectedBranch
+        },
+        selectedPerson (state) {
+            return state.selectedPerson
         },
         branches (state) {
             return state.branches
@@ -45,6 +49,9 @@ export default new Vuex.Store({
         },
         SET_SELECTED_LOCATION (state, location) {
             state.selectedLocation = location;
+        },
+        SET_SELECTED_PERSON (state, person) {
+            state.selectedPerson = person;
         },
         SET_BRANCHES (state, branches) {
             state.branches = branches;
@@ -71,6 +78,9 @@ export default new Vuex.Store({
       },
       setSelectedLocation({commit, state}, payload) {
         commit('SET_SELECTED_LOCATION', payload);
+      },
+      setSelectedPerson({commit, state}, payload) {
+        commit('SET_SELECTED_PERSON', payload);
       },
       parseBranches({commit, dispatch, state}, payload) {
         var branches = payload.branches;
