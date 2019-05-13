@@ -1,32 +1,26 @@
 <template>
   <div data-app="true" id="app">
     <search-bar></search-bar>
-    <main>
-      <router-view></router-view>
-    </main>
+    <search-results></search-results>
   </div>
 </template>
 
 <script>
-import SearchBar from './components/SearchBar'
-export default {
-  name: 'App',
-  components: {
-    'search-bar': SearchBar,
+  import SearchResults from './components/SearchResults'
+  import SearchBar from './components/SearchBar'
+  export default {
+    name: 'App',
+    components: {
+      'search-bar': SearchBar,
+      'search-results': SearchResults
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  background: #fafafa;
-  width: 1366px;
-  margin: auto;
-}
-
-main {
-  display: flex;
-  flex: 1 0 auto;
-}
-
+  #app {
+    background: #fafafa;
+    width: 1366px;
+    margin: auto;
+  }
 </style>

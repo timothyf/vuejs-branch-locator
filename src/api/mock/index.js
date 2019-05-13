@@ -1,6 +1,5 @@
 import Vue from 'vue'
 
-
 const fetch = (mockData, time = 0) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -11,7 +10,7 @@ const fetch = (mockData, time = 0) => {
 
 export default {
   // field_geocoordinates_proximity-lat=47.260861&field_geocoordinates_proximity-lng=-122.443224&field_geocoordinates_proximity=50
-  fetchBranches(location, searchRadius) {
+  fetchData(location, searchRadius) {
     let latParam = "field_geocoordinates_proximity-lat=" + location.lat;
     let lngParam = "&field_geocoordinates_proximity-lng=" + location.lng;
     let radiusParam = "&field_geocoordinates_proximity=" + searchRadius;

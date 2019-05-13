@@ -10,7 +10,10 @@ export default new Vuex.Store({
     state: {
         selectedLocation: {},
         selectedBranch: null,
-        branches: []
+        branches: [],
+        mortgageConsultants: [],
+        relationshipManagers: [],
+        privateBankers: []
     },
     getters: {
         selectedLocation (state) {
@@ -22,12 +25,14 @@ export default new Vuex.Store({
         branches (state) {
             return state.branches
         },
-        getBranchById (state, getters) {
-            return (Id) => {
-                return state.branches.find(item => {
-                    return item.branchInfo.branchId === Id;
-                })
-            }
+        mortgageConsultants (state) {
+            return state.mortgageConsultants
+        },
+        relationshipManagers (state) {
+            return state.relationshipManagers
+        },
+        privateBankers (state) {
+            return state.privateBankers
         }
     },
     mutations: {
@@ -38,58 +43,81 @@ export default new Vuex.Store({
             state.branches = branches;
         },
         SET_SELECTED_BRANCH (state, branch) {
-            state.selectedBranch = branch
+            state.selectedBranch = branch;
+        },
+        ADD_MORTGAGE_CONSULTANT (state, mortgageConsultant) {
+          state.mortgageConsultants.push(mortgageConsultant);
+        },
+        ADD_RELATIONSHIP_MANAGER (state, relationshipManager) {
+          state.relationshipManagers.push(relationshipManager);
+        },
+        ADD_PRIVATE_BANKER (state, privateBanker) {
+          state.privateBankers.push(privateBanker);
         }
     },
     actions: {
-        onBranchClick({commit, dispatch, state}, branchId) {
-          dispatch('updateSelectedBranch', branchId);
-        },
         updateSelectedBranch({commit}, payload) {
           commit('SET_SELECTED_BRANCH', payload)
         },
         setSelectedLocation({commit, state}, payload) {
           commit('SET_SELECTED_LOCATION', payload);
         },
-        fetchBranches({commit, dispatch, state}, payload) {
+        parseBranches({commit, dispatch, state}, payload) {
+          console.log("store.parseBranches()");
+          var branches = payload.branches;
+          var location = payload.location;
+          for (var branch of branches) {
+            branch.services = {};
+            let branchServices = branch.branchInfo.branchServices;
+            for (var service of branchServices) {
+              if (service.serviceId == 1 || service.serviceId == 2 || service.serviceId == 3 || service.serviceId == 5) {
+                branch.services.atm = true;
+              }
+              else if (service.serviceId == 4) {
+                // not sure what this serviceId is
+              }
+              else if (service.serviceId == 6) {
+                branch.services.nightDrop = true;
+              }
+              else if (service.serviceId == 7) {
+                branch.services.safeDeposit = true;
+              }
+              else if (service.serviceId == 8) {
+                branch.services.currency = true;
+              }
+              else if (service.serviceId == 9) {
+                branch.services.extendedHours = true;
+              }
+            }
+          }
+          commit('SET_BRANCHES', branches);
+          dispatch('setSelectedLocation', location);
+        },
+        parsePeople() {
+
+        },
+        fetchData({commit, dispatch, state}, payload) {
+          console.log("store.fetchData()");
           let location = payload.location;
           let searchRadius = payload.searchRadius;
-          return client.fetchBranches(location, searchRadius)
+          let searchType = payload.searchType;
+          return client.fetchData(location, searchRadius)
                 .then(data => {
                   if (data) {
-                    if (data[0].branchLocations) {
-                      const branches = data[0].branchLocations;
-                      for (var branch of branches) {
-                        branch.services = {};
-                        let branchServices = branch.branchInfo.branchServices;
-                        for (var service of branchServices) {
-                          if (service.serviceId == 1) {
-                            // not sure what this serviceId is
-                          }
-                          if (service.serviceId == 2 || service.serviceId == 3) {
-                            branch.services.atm = true;
-                          }
-                          else if (service.serviceId == 4) {
-                            // not sure what this serviceId is
-                          }
-                          else if (service.serviceId == 5) {
-                            // not sure what this serviceId is
-                          }
-                          else if (service.serviceId == 6) {
-                            branch.services.nightDrop = true;
-                          }
-                          else if (service.serviceId == 7) {
-                            branch.services.safeDeposit = true;
-                          }
-                          else if (service.serviceId == 8) {
-                            branch.services.currency = true;
-                          }
-                          console.log(service.searchLabel);
-                        }
+                    data.forEach(function(item) {
+                      if (item.branchLocations) {
+                        dispatch('parseBranches', {branches:item.branchLocations, location:location});
                       }
-                      commit('SET_BRANCHES', branches);
-                      dispatch('setSelectedLocation', location);
-                    }
+                      else if (item.field_job_title == "Mortgage Consultant") {
+                        commit('ADD_MORTGAGE_CONSULTANT', item);
+                      }
+                      else if (item.field_job_title == "Relationship Manager") {
+                        commit('ADD_RELATIONSHIP_MANAGER', item);
+                      }
+                      else if (item.field_job_title == "Private Banker") {
+                        commit('ADD_PRIVATE_BANKER', item);
+                      }
+                    });
                   }
                 });
         }

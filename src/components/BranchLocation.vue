@@ -34,9 +34,6 @@
 
 <script>
 import moment from 'moment'
-import { mapActions } from 'vuex'
-const config = require('../../config')
-
 
 export default {
   data() {
@@ -60,7 +57,6 @@ export default {
      this.getDistance();
   },
   methods: {
-    ...mapActions(['onBranchClick']),
     // getBranchHoursDesc() {
     //   if (this.branch.operationalHours.open24Hours) {
     //     return 'Open 24 hours';
@@ -72,6 +68,9 @@ export default {
     //     return '(call for branch hours)';
     //   }
     // },
+    onBranchClick(branchId) {
+      this.$store.dispatch('updateSelectedBranch', branchId);
+    },
     getDirectionsUrl() {
       var destination = "&destination=" + this.branch.branchInfo.latitude + "%2C" + this.branch.branchInfo.longitude;
       return process.env.DIRECTIONS_BASE_URL + destination;

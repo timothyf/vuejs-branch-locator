@@ -1,23 +1,19 @@
 <template>
   <nav>
-    <!-- <img src="../../static/texture-image.jpg"
-         srcset="../../static/texture-image@2x.jpg 2x,
-                 ../../static/texture-image@3x.jpg 3x"
-         class="Texture-Image"> -->
     <div id="search-wrapper">
       <div id="search">
         <div id="type-search">
           <label>I would like to locate a</label><br/>
           <div class="select">
-            <select id="branch-type" class="select-css">
-              <option>Branch</option>
-              <option>Mortgage Consultant</option>
-              <option>Relationship Manager</option>
-              <option>Private Banker</option>
+            <select id="branch-type" class="select-css" @change="onChangeSearchType($event)">
+              <option value="Branch">Branch</option>
+              <option value="Mortgage Consultant">Mortgage Consultant</option>
+              <option value="Relationship Manager">Relationship Manager</option>
+              <option value="Private Banker">Private Banker</option>
             </select>
           </div>
         </div>
-        <div id="left-content">
+        <div id="right-content">
           <div id="address-search">
             <input v-model="currentAddress" placeholder="City, State / Zipcode">
             <button id="search-btn" @click="handleSearch">
@@ -53,10 +49,10 @@
           </div>
         </div>
       </div>
-      <!-- <div id="service-filters">
+      <div id="service-filters">
         <label>Filter by Bank Services</label>
         <div id="expander"></div>
-      </div> -->
+      </div>
     </div>
   </nav>
 </template>
@@ -66,7 +62,8 @@ export default {
   data() {
     return {
       currentAddress: "",
-      searchRadius: 10
+      searchRadius: 10,
+      searchType: 'Branch'
     }
   },
   computed: {
@@ -86,9 +83,10 @@ export default {
     onChangeSearchRadius(event) {
         this.searchRadius = event.target.value;
     },
+    onChangeSearchType(event) {
+      this.searchType = event.target.value;
+    },
     handleSearch() {
-      // get input search param
-      // convert search param to geocoords
       var that = this;
       var searchParams = {};
       searchParams.location = {};
@@ -96,7 +94,8 @@ export default {
         searchParams.location.lat = location.lat();
         searchParams.location.lng = location.lng();
         searchParams.searchRadius = that.searchRadius;
-        that.$store.dispatch('fetchBranches', searchParams);
+        searchParams.searchType = that.searchType;
+        that.$store.dispatch('fetchData', searchParams);
       });
     },
     // get geocoords for address passed in
@@ -184,7 +183,7 @@ export default {
     position: absolute;
     opacity: 0.2;
   }
-  #left-content {
+  #right-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
