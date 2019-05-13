@@ -62,8 +62,7 @@ export default {
   data() {
     return {
       currentAddress: "",
-      searchRadius: 10,
-      searchType: 'Branch'
+      searchRadius: 10
     }
   },
   computed: {
@@ -73,6 +72,14 @@ export default {
       },
       set: function(location) {
         this.$store.dispatch('setSelectedLocation', location);
+      }
+    },
+    searchType: {
+      get: function() {
+        return this.$store.getters.searchType
+      },
+      set: function(searchType) {
+        this.$store.dispatch('setSearchType', searchType);
       }
     }
   },

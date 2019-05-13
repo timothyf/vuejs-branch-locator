@@ -8,6 +8,7 @@ Vue.use(VueResource)
 
 export default new Vuex.Store({
     state: {
+        searchType: 'Branch',
         selectedLocation: {},
         selectedBranch: null,
         branches: [],
@@ -16,6 +17,9 @@ export default new Vuex.Store({
         privateBankers: []
     },
     getters: {
+        searchType (state) {
+          return state.searchType
+        },
         selectedLocation (state) {
             return state.selectedLocation
         },
@@ -36,6 +40,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        SET_SEARCH_TYPE (state, searchType) {
+          state.searchType = searchType;
+        },
         SET_SELECTED_LOCATION (state, location) {
             state.selectedLocation = location;
         },
@@ -56,70 +63,68 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        updateSelectedBranch({commit}, payload) {
-          commit('SET_SELECTED_BRANCH', payload)
-        },
-        setSelectedLocation({commit, state}, payload) {
-          commit('SET_SELECTED_LOCATION', payload);
-        },
-        parseBranches({commit, dispatch, state}, payload) {
-          console.log("store.parseBranches()");
-          var branches = payload.branches;
-          var location = payload.location;
-          for (var branch of branches) {
-            branch.services = {};
-            let branchServices = branch.branchInfo.branchServices;
-            for (var service of branchServices) {
-              if (service.serviceId == 1 || service.serviceId == 2 || service.serviceId == 3 || service.serviceId == 5) {
-                branch.services.atm = true;
-              }
-              else if (service.serviceId == 4) {
-                // not sure what this serviceId is
-              }
-              else if (service.serviceId == 6) {
-                branch.services.nightDrop = true;
-              }
-              else if (service.serviceId == 7) {
-                branch.services.safeDeposit = true;
-              }
-              else if (service.serviceId == 8) {
-                branch.services.currency = true;
-              }
-              else if (service.serviceId == 9) {
-                branch.services.extendedHours = true;
-              }
+      setSearchType({commit, state}, payload) {
+        commit('SET_SEARCH_TYPE', payload);
+      },
+      updateSelectedBranch({commit}, payload) {
+        commit('SET_SELECTED_BRANCH', payload)
+      },
+      setSelectedLocation({commit, state}, payload) {
+        commit('SET_SELECTED_LOCATION', payload);
+      },
+      parseBranches({commit, dispatch, state}, payload) {
+        var branches = payload.branches;
+        var location = payload.location;
+        for (var branch of branches) {
+          branch.services = {};
+          let branchServices = branch.branchInfo.branchServices;
+          for (var service of branchServices) {
+            if (service.serviceId == 1 || service.serviceId == 2 || service.serviceId == 3 || service.serviceId == 5) {
+              branch.services.atm = true;
+            }
+            else if (service.serviceId == 4) {
+              // not sure what this serviceId is
+            }
+            else if (service.serviceId == 6) {
+              branch.services.nightDrop = true;
+            }
+            else if (service.serviceId == 7) {
+              branch.services.safeDeposit = true;
+            }
+            else if (service.serviceId == 8) {
+              branch.services.currency = true;
+            }
+            else if (service.serviceId == 9) {
+              branch.services.extendedHours = true;
             }
           }
-          commit('SET_BRANCHES', branches);
-          dispatch('setSelectedLocation', location);
-        },
-        parsePeople() {
-
-        },
-        fetchData({commit, dispatch, state}, payload) {
-          console.log("store.fetchData()");
-          let location = payload.location;
-          let searchRadius = payload.searchRadius;
-          let searchType = payload.searchType;
-          return client.fetchData(location, searchRadius)
-                .then(data => {
-                  if (data) {
-                    data.forEach(function(item) {
-                      if (item.branchLocations) {
-                        dispatch('parseBranches', {branches:item.branchLocations, location:location});
-                      }
-                      else if (item.field_job_title == "Mortgage Consultant") {
-                        commit('ADD_MORTGAGE_CONSULTANT', item);
-                      }
-                      else if (item.field_job_title == "Relationship Manager") {
-                        commit('ADD_RELATIONSHIP_MANAGER', item);
-                      }
-                      else if (item.field_job_title == "Private Banker") {
-                        commit('ADD_PRIVATE_BANKER', item);
-                      }
-                    });
+        }
+        commit('SET_BRANCHES', branches);
+        dispatch('setSelectedLocation', location);
+      },
+      fetchData({commit, dispatch, state}, payload) {
+        let location = payload.location;
+        let searchRadius = payload.searchRadius;
+        let searchType = payload.searchType;
+        return client.fetchData(location, searchRadius)
+            .then(data => {
+              if (data) {
+                data.forEach(function(item) {
+                  if (item.branchLocations) {
+                    dispatch('parseBranches', {branches:item.branchLocations, location:location});
+                  }
+                  else if (item.field_job_title == "Mortgage Consultant") {
+                    commit('ADD_MORTGAGE_CONSULTANT', item);
+                  }
+                  else if (item.field_job_title == "Relationship Manager") {
+                    commit('ADD_RELATIONSHIP_MANAGER', item);
+                  }
+                  else if (item.field_job_title == "Private Banker") {
+                    commit('ADD_PRIVATE_BANKER', item);
                   }
                 });
-        }
+              }
+            });
+      }
     }
 })

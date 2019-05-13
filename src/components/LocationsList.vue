@@ -1,14 +1,22 @@
 <template>
   <div id="locations-list">
-    <branch-location v-for="(branch, index) in branches"
+    <branch-location v-if="searchType == 'Branch'"
+                     v-for="(branch, index) in branches"
                      v-bind:branch="branch"
                      :index="index"
                      v-bind:key="branch.id"></branch-location>
+
+    <mortgage-consultant v-if="searchType == 'Mortgage Consultant'"
+                         v-for="(consultant, index) in mortgageConsultants"
+                         v-bind:consultant="consultant"
+                         :index="index"
+                         v-bind:key="consultant.id"></mortgage-consultant>
   </div>
 </template>
 
 <script>
 import BranchLocation from './BranchLocation'
+import MortgageConsultant from './MortgageConsultant'
 export default {
   data() {
     return {
@@ -17,6 +25,7 @@ export default {
   },
   components: {
     'branch-location': BranchLocation,
+    'mortgage-consultant': MortgageConsultant
   },
   computed: {
     selectedBranch: {
@@ -27,8 +36,19 @@ export default {
         this.$store.dispatch('updateSelectedBranch', value);
       }
     },
+    searchType: {
+      get() {
+        return this.$store.getters.searchType;
+      },
+      set(searchType) {
+        this.$store.dispatch('setSearchType', searchType);
+      }
+    },
     branches () {
-      return this.$store.getters.branches
+      return this.$store.getters.branches;
+    },
+    mortgageConsultants () {
+      return this.$store.getters.mortgageConsultants;
     }
   },
   methods: {
