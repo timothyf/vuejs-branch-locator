@@ -33,45 +33,54 @@
         zoom: 11,
         mapMarkers: null,
         mapMarkerIconSize: null,
-        ignoreCenterOnSelectedBranch: false,
+        ignoreCenterOnSelectedItem: false,
         styles: mapStyles
       }
     },
     computed: {
       selectedLocation() {
-        return this.$store.getters.selectedLocation
+        return this.$store.getters.selectedLocation;
       },
-      selectedBranch: {
+      selectedItem: {
         get() {
-          return this.$store.getters.selectedBranch
+          return this.$store.getters.selectedItem;
         },
         set(value) {
-          this.$store.dispatch('updateSelectedBranch', value);
+          this.$store.dispatch('setSelectedItem', value);
         }
       },
       branches() {
-        return this.$store.getters.branches
-      }
+        return this.$store.getters.branches;
+      },
+      mortgageConsultants() {
+        return this.$store.getters.mortgageConsultants;
+      },
+      searchType: {
+        get() {
+          return this.$store.getters.searchType;
+        }
+      },
     },
     watch: {
       selectedLocation() {
         this.updateMapCenter(this.selectedLocation)
       },
-      selectedBranch(newValue, oldValue) {
+      selectedItem(newValue, oldValue) {
         this.selectMapMarker(oldValue, false)
         this.selectMapMarker(newValue, true)
       }
     },
     methods: {
       onMapMarkerClick(id) {
-        this.ignoreCenterOnSelectedBranch = true
-        this.selectedBranch = id
+        this.ignoreCenterOnSelectedItem = true;
+        console.log("selectedItem = " + id);
+        this.selectedItem = id;
       },
       onMapMarkerMouseOver(id) {
-        const marker = this.mapMarkers[id]
-        marker.animation = 1
+        const marker = this.mapMarkers[id];
+        marker.animation = 1;
         setTimeout(() => {
-          marker.animation = 4
+          marker.animation = 4;
         }, 300)
       },
       onMapMarkerMouseOut(id) {
@@ -89,29 +98,49 @@
       },
       addMapMarkers() {
         let markers = {}
-        for (let i = 0; i < this.branches.length; i++) {
-          const marker = {}
-          marker.id = this.branches[i].branchInfo.branchId;
-          marker.title = this.branches[i].branchInfo.branchName + '\n' +
-                         this.branches[i].branchInfo.address.addressLine[0] + '\n' +
-            this.branches[i].branchInfo.phone;
-          marker.animation = 4;
-          marker.position = {
-            lat: this.branches[i].branchInfo.latitude,
-            lng: this.branches[i].branchInfo.longitude
+        if (this.searchType == 'Branch') {
+          for (let i = 0; i < this.branches.length; i++) {
+            let location = {
+              lat: this.branches[i].branchInfo.latitude,
+              lng: this.branches[i].branchInfo.longitude
+            };
+            let marker = this.createMapMarker(location, this.branches[i].branchInfo.branchId);
+            markers[this.branches[i].branchInfo.branchId] = marker;
           }
-          marker.icon = {
-            url: process.env.DEFAULT_MAP_ICON,
-            scaledSize: this.mapMarkerIconSize
+        }
+        else if (this.searchType == 'Mortgage Consultant') {
+          for (let i = 0; i < this.mortgageConsultants.length; i++) {
+            if (this.mortgageConsultants[i].field_primary_address_export.geocoordinates) {
+              let location = {
+                lat: parseFloat(this.mortgageConsultants[i].field_primary_address_export.geocoordinates.latitude),
+                lng: parseFloat(this.mortgageConsultants[i].field_primary_address_export.geocoordinates.longitude)
+              };
+              let marker = this.createMapMarker(location, this.mortgageConsultants[i].field_nmls);
+              markers[this.mortgageConsultants[i].field_nmls] = marker;
+            }
           }
-          markers[this.branches[i].branchInfo.branchId] = marker
         }
         this.mapMarkers = markers
       },
-      centerOnBranch(location) {
+      createMapMarker(location, markerId) {
+        const marker = {};
+        marker.id = markerId;
+        marker.animation = 4;
+        marker.position = {
+          lat: location.lat,
+          lng: location.lng
+        }
+        marker.icon = {
+          url: process.env.DEFAULT_MAP_ICON,
+          scaledSize: this.mapMarkerIconSize
+        }
+        return marker;
+        //markers[markerId] = marker;
+      },
+      centerOnItem(location) {
         // will repositioned the map center to the specific location
-        if (this.ignoreCenterOnSelectedBranch) {
-          this.ignoreCenterOnSelectedBranch = false
+        if (this.ignoreCenterOnSelectedItem) {
+          this.ignoreCenterOnSelectedItem = false
         }
         else {
           if (location) {
@@ -129,8 +158,8 @@
           }
           this.mapMarkers[id].icon = icon
           if (isOn) {
-            const branchLocation = Object.assign({}, this.mapMarkers[id].position)
-            this.centerOnBranch(branchLocation)
+            const itemLocation = Object.assign({}, this.mapMarkers[id].position);
+            this.centerOnItem(itemLocation);
           }
         }
       }

@@ -10,8 +10,7 @@ export default new Vuex.Store({
     state: {
         searchType: 'Branch',
         selectedLocation: {},
-        selectedBranch: null,
-        selectedPerson: null,
+        selectedItem: null,
         branches: [],
         mortgageConsultants: [],
         relationshipManagers: [],
@@ -24,11 +23,8 @@ export default new Vuex.Store({
         selectedLocation (state) {
             return state.selectedLocation
         },
-        selectedBranch (state) {
-            return state.selectedBranch
-        },
-        selectedPerson (state) {
-            return state.selectedPerson
+        selectedItem (state) {
+            return state.selectedItem
         },
         branches (state) {
             return state.branches
@@ -50,14 +46,11 @@ export default new Vuex.Store({
         SET_SELECTED_LOCATION (state, location) {
             state.selectedLocation = location;
         },
-        SET_SELECTED_PERSON (state, person) {
-            state.selectedPerson = person;
-        },
         SET_BRANCHES (state, branches) {
             state.branches = branches;
         },
-        SET_SELECTED_BRANCH (state, branch) {
-            state.selectedBranch = branch;
+        SET_SELECTED_ITEM (state, item) {
+            state.selectedItem = item;
         },
         ADD_MORTGAGE_CONSULTANT (state, mortgageConsultant) {
           state.mortgageConsultants.push(mortgageConsultant);
@@ -67,20 +60,22 @@ export default new Vuex.Store({
         },
         ADD_PRIVATE_BANKER (state, privateBanker) {
           state.privateBankers.push(privateBanker);
+        },
+        RESET_PEOPLE (state) {
+          state.mortgageConsultants = [];
+          state.relationshipManagers = [];
+          state.privateBankers = [];
         }
     },
     actions: {
       setSearchType({commit, state}, payload) {
         commit('SET_SEARCH_TYPE', payload);
       },
-      updateSelectedBranch({commit}, payload) {
-        commit('SET_SELECTED_BRANCH', payload)
+      setSelectedItem({commit}, payload) {
+        commit('SET_SELECTED_ITEM', payload)
       },
       setSelectedLocation({commit, state}, payload) {
         commit('SET_SELECTED_LOCATION', payload);
-      },
-      setSelectedPerson({commit, state}, payload) {
-        commit('SET_SELECTED_PERSON', payload);
       },
       parseBranches({commit, dispatch, state}, payload) {
         var branches = payload.branches;
@@ -119,6 +114,7 @@ export default new Vuex.Store({
         return client.fetchData(location, searchRadius)
             .then(data => {
               if (data) {
+                console.log("got data");
                 data.forEach(function(item) {
                   if (item.branchLocations) {
                     dispatch('parseBranches', {branches:item.branchLocations, location:location});
@@ -131,6 +127,11 @@ export default new Vuex.Store({
                   }
                   else if (item.field_job_title == "Private Banker") {
                     commit('ADD_PRIVATE_BANKER', item);
+                  }
+                  else if (item.error) {
+                    commit('SET_BRANCHES', []);
+                    commit('RESET_PEOPLE');
+                    dispatch('setSelectedLocation', location);
                   }
                 });
               }

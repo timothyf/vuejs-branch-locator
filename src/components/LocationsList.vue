@@ -1,5 +1,5 @@
 <template>
-  <div id="locations-list">
+  <div id="items-list">
     <branch-location v-if="searchType == 'Branch'"
                      v-for="(branch, index) in branches"
                      v-bind:branch="branch"
@@ -34,7 +34,7 @@ import RelationshipManager from './RelationshipManager'
 export default {
   data() {
     return {
-      ignoreScrollToSelectedBranch: false
+      ignoreScrollToSelectedItem: false
     }
   },
   components: {
@@ -44,20 +44,17 @@ export default {
     'relationship-manager': RelationshipManager
   },
   computed: {
-    selectedBranch: {
+    selectedItem: {
       get() {
-        return this.$store.getters.selectedBranch;
+        return this.$store.getters.selectedItem;
       },
       set(value) {
-        this.$store.dispatch('updateSelectedBranch', value);
+        this.$store.dispatch('setSelectedItem', value);
       }
     },
     searchType: {
       get() {
         return this.$store.getters.searchType;
-      },
-      set(searchType) {
-        this.$store.dispatch('setSearchType', searchType);
       }
     },
     branches () {
@@ -74,27 +71,27 @@ export default {
     }
   },
   methods: {
-    scrollToSelectedBranch() {
-      const branchesList = document.querySelector('#locations-list');
-      const selectedBranch = document.querySelector('.branch-location-card.isSelected');
-      if (branchesList && selectedBranch) {
-        branchesList.scrollTop = selectedBranch.offsetTop - selectedBranch.offsetHeight;
+    scrollToSelectedItem() {
+      const itemsList = document.querySelector('#items-list');
+      const selectedItem = document.querySelector('.item-card.isSelected');
+      if (itemsList && selectedItem) {
+        itemsList.scrollTop = selectedItem.offsetTop - selectedItem.offsetHeight;
       }
     },
     resetComponentData() {
-      this.ignoreScrollToSelectedBranch = false;
+      this.ignoreScrollToSelectedItem = false;
     }
   },
   watch: {
-    selectedBranch (newValue, oldValue) {
+    selectedItem (newValue, oldValue) {
         // need to wait until the selected branch class changes
-        if (this.ignoreScrollToSelectedBranch) {
-          this.ignoreScrollToSelectedBranch = false;
+        if (this.ignoreScrollToSelectedItem) {
+          this.ignoreScrollToSelectedItem = false;
         }
         else {
           // triger the auto scroll only if the selection is triggered from outside the list
           setTimeout(() => {
-              this.scrollToSelectedBranch()
+              this.scrollToSelectedItem()
           }, 50);
         }
     }
@@ -103,7 +100,7 @@ export default {
 </script>
 
 <style>
-  #locations-list {
+  #items-list {
     width: 503px;
     height: 505px;
     background-color: #ededed;

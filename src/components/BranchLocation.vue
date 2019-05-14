@@ -1,5 +1,5 @@
 <template>
-  <div class="branch-location-card" :class="{isSelected: selectedBranch === branch.branchInfo.branchId}" @click.capture="onBranchClick(branch.branchInfo.branchId)">
+  <div class="item-card" :class="{isSelected: selectedItem === branch.branchInfo.branchId}" @click.capture="onBranchClick(branch.branchInfo.branchId)">
     <div class="index">{{ index+1 }}</div>
     <div class='indented'>
       <div class="multi-item">
@@ -47,9 +47,9 @@ export default {
     index: Number
   },
   computed: {
-    selectedBranch: {
+    selectedItem: {
       get() {
-        return this.$store.getters.selectedBranch
+        return this.$store.getters.selectedItem
       }
     }
   },
@@ -69,7 +69,7 @@ export default {
     //   }
     // },
     onBranchClick(branchId) {
-      this.$store.dispatch('updateSelectedBranch', branchId);
+      this.$store.dispatch('setSelectedItem', branchId);
     },
     getDirectionsUrl() {
       var destination = "&destination=" + this.branch.branchInfo.latitude + "%2C" + this.branch.branchInfo.longitude;
@@ -123,7 +123,7 @@ export default {
 </script>
 
 <style>
-  .branch-location-card {
+  .item-card {
     padding-top: 1px;
     position: relative;
     background-color: #fff;
@@ -133,7 +133,7 @@ export default {
     margin-top: 30px;
     margin-bottom: 30px;
   }
-  .branch-location-card .index {
+  .item-card .index {
     position: absolute;
     top: -30px;
     left: 30px;
