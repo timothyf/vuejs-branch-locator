@@ -5,6 +5,8 @@
       <div class="profile-top">
         <div>
           <div class="person-name">{{person.title}}</div>
+          <div class="person-title">{{person.field_job_title}}</div>
+          <div class="person-nmls">NMLS ID: {{person.field_nmls}}</div>
           <div class="address-1">{{ person.field_primary_address_export.address.address_line1}}</div>
           <div class="address-2">{{ person.field_primary_address_export.address.city}}, {{person.field_primary_address_export.address.state}} {{person.field_primary_address_export.address.zipCode}}</div>
         </div>
@@ -13,11 +15,11 @@
         </div>
       </div>
       <hr/>
-      <!-- <div class="person-hours">
-        <img src="../../static/clock-small.svg" class="branch-icon">
-        {{ getPersonHoursDesc(person) }}
-      </div> -->
       <div class="multi-item">
+        <div class="person-email">
+          <img src="../../static/email.svg" class="branch-icon">
+          {{ person.field_email }}
+        </div>
         <div class="person-distance">{{ distance }}</div>
       </div>
       <div class="multi-item">
@@ -27,7 +29,7 @@
         </div>
         <div class="directions">
           <a target="_blank" :href="getDirectionsUrl()">Directions</a>
-      </div>
+        </div>
       </div>
     </div>
   </div>
@@ -158,7 +160,7 @@ export default {
   .profile-image img {
     width: 90px;
   }
-  .person-name {
+  .person-name, .person-title, .person-nmls {
     width: 280px;
     height: 16px;
     font-family: Graphik;
@@ -209,14 +211,14 @@ export default {
     letter-spacing: normal;
     color: #5b5b5b;
   }
-  .person-phone {
+  .person-phone, .person-email {
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #5b5b5b;
     line-height: 1.57;
   }
-  .person-phone img {
+  .person-phone img, .person-email img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
