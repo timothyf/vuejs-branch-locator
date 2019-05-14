@@ -2,17 +2,24 @@
   <div class="item-card" :class="{isSelected: selectedItem === person.field_nmls}" @click.capture="onPersonClick(person.field_nmls)">
     <div class="index">{{ index+1 }}</div>
     <div class='indented'>
-      <div class="multi-item">
-        <div class="person-name">{{person.title}}</div>
-        <div class="person-distance">{{ distance }}</div>
+      <div class="profile-top">
+        <div>
+          <div class="person-name">{{person.title}}</div>
+          <div class="address-1">{{ person.field_primary_address_export.address.address_line1}}</div>
+          <div class="address-2">{{ person.field_primary_address_export.address.city}}, {{person.field_primary_address_export.address.state}} {{person.field_primary_address_export.address.zipCode}}</div>
+        </div>
+        <div class="profile-image">
+          <img :src="person.profile_image.url" />
+        </div>
       </div>
-      <div class="address-1">{{ person.field_primary_address_export.address.address_line1}}</div>
-      <div class="address-2">{{ person.field_primary_address_export.address.city}}, {{person.field_primary_address_export.address.state}} {{person.field_primary_address_export.address.zipCode}}</div>
       <hr/>
       <!-- <div class="person-hours">
         <img src="../../static/clock-small.svg" class="branch-icon">
         {{ getPersonHoursDesc(person) }}
       </div> -->
+      <div class="multi-item">
+        <div class="person-distance">{{ distance }}</div>
+      </div>
       <div class="multi-item">
         <div class="person-phone">
           <img src="../../static/phone.svg" class="branch-icon">
@@ -144,6 +151,12 @@ export default {
   .multi-item {
     display: flex;
     justify-content: space-between;
+  }
+  .profile-top {
+    display: flex;
+  }
+  .profile-image img {
+    width: 90px;
   }
   .person-name {
     width: 280px;
