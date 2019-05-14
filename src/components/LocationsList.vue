@@ -12,7 +12,7 @@
                          :index="index"
                          v-bind:key="person.id"></mortgage-consultant>
 
-   <private-banker v-if="searchType == 'Private Banker'"
+    <private-banker v-if="searchType == 'Private Banker'"
                    v-for="(person, index) in privateBankers"
                    v-bind:person="person"
                    :index="index"

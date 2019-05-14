@@ -9,10 +9,10 @@
       <div class="address-1">{{ branch.branchInfo.address.addressLine[0]}}</div>
       <div class="address-2">{{ branch.branchInfo.address.city}}, {{branch.branchInfo.address.state}} {{branch.branchInfo.address.zipCode}}</div>
       <hr/>
-      <!-- <div class="branch-hours">
+      <div class="branch-hours">
         <img src="../../static/clock-small.svg" class="branch-icon">
-        {{ getBranchHoursDesc(branch) }}
-      </div> -->
+        <span v-html="getBranchHoursDesc()"></span>
+      </div>
       <div class="multi-item">
         <div class="branch-phone">
           <img src="../../static/phone.svg" class="branch-icon">
@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   data() {
     return {
@@ -53,21 +51,20 @@ export default {
       }
     }
   },
-  beforeMount(){
+  beforeMount() {
      this.getDistance();
   },
   methods: {
-    // getBranchHoursDesc() {
-    //   if (this.branch.operationalHours.open24Hours) {
-    //     return 'Open 24 hours';
-    //   } else if (this.branch.operationalHours.todayHrs) {
-    //     return 'Open until: ' + moment(this.branch.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
-    //   } else if (this.branch.operationalHours.monToFriHrs) {
-    //     return 'Open until: ' + moment(this.branch.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
-    //   } else {
-    //     return '(call for branch hours)';
-    //   }
-    // },
+    getBranchHoursDesc() {
+      var hoursDisplay = "";
+      let branchHours = this.branch.branchHours;
+      branchHours.forEach(function(item) {
+        hoursDisplay += item.displayLabel + "  ";
+        hoursDisplay += item.displayHours;
+        hoursDisplay += "<br/>";
+      });
+      return hoursDisplay;
+    },
     onBranchClick(branchId) {
       this.$store.dispatch('setSelectedItem', branchId);
     },
@@ -99,8 +96,10 @@ export default {
       });
     },
     getDistance() {
+      console.log('getDistance');
       var that = this;
       this.getCurrentLocation().then(function(location) {
+        console.log('getDistance-2');
         let origin = location;
         var service = new google.maps.DistanceMatrixService();
         var destination = {};
@@ -112,7 +111,8 @@ export default {
             destinations: [destination],
             travelMode: 'DRIVING',
             unitSystem: google.maps.UnitSystem.IMPERIAL,
-          }, function(response, status) {
+          },
+          function(response, status) {
             var distance = (response.rows[0].elements[0].distance.text).replace(/['"]+/g, '');
             that.distance = distance;
         });
@@ -223,6 +223,8 @@ export default {
     font-size: 14px;
     color: #5b5b5b;
     line-height: 1.57;
+    display: flex;
+    margin-bottom: 5px;
   }
   .branch-hours img {
     width: 20px;
