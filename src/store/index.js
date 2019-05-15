@@ -116,7 +116,6 @@ export default new Vuex.Store({
             .then(function(response) {
               response.json().then(data => {
                 if (data) {
-                  console.log("got data");
                   data.forEach(function(item) {
                     if (item.branchLocations) {
                       dispatch('parseBranches', {branches:item.branchLocations, location:location});

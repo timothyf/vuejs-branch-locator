@@ -73,7 +73,6 @@
     methods: {
       onMapMarkerClick(id) {
         this.ignoreCenterOnSelectedItem = true;
-        console.log("selectedItem = " + id);
         this.selectedItem = id;
       },
       onMapMarkerMouseOver(id) {

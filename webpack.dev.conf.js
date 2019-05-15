@@ -69,7 +69,7 @@ const devWebpackConfig = {
     clientLogLevel: 'warning',
     hot: true,
     host: process.env.HOST,
-    port: 5000,
+    port: process.env.PORT,
     overlay: {
       warnings: false,
       errors: true

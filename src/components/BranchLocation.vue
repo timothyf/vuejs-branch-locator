@@ -96,10 +96,8 @@ export default {
       });
     },
     getDistance() {
-      console.log('getDistance');
       var that = this;
       this.getCurrentLocation().then(function(location) {
-        console.log('getDistance-2');
         let origin = location;
         var service = new google.maps.DistanceMatrixService();
         var destination = {};
