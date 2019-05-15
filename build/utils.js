@@ -1,21 +1,14 @@
 'use strict'
 const path = require('path')
-const config = require('../config')
-const packageConfig = require('../package.json')
+require('dotenv').config()
 
-exports.assetsPath = function (_path) {
-  const assetsSubDirectory = config.dev.assetsSubDirectory;
-  return path.posix.join(assetsSubDirectory, _path);
-}
 
 exports.cssLoaders = function (options) {
   options = options || {}
 
   const cssLoader = {
     loader: 'css-loader',
-    options: {
-      sourceMap: options.sourceMap
-    }
+    options: {}
   }
 
   function generateLoaders (loader, loaderOptions) {
@@ -24,9 +17,7 @@ exports.cssLoaders = function (options) {
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
-        options: Object.assign({}, loaderOptions, {
-          sourceMap: options.sourceMap
-        })
+        options: Object.assign({}, loaderOptions, {})
       })
     }
     return ['vue-style-loader'].concat(loaders)

@@ -1,7 +1,6 @@
 'use strict'
 const utils = require('./utils')
 const webpack = require('webpack')
-const config = require('../config')
 const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
@@ -10,25 +9,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.dev.cssSourceMap
-    })
+    rules: utils.styleLoaders({})
   },
 
   devServer: {
     clientLogLevel: 'warning',
     hot: true,
     host: process.env.HOST,
-    port: process.env.PORT,
-    overlay: config.dev.errorOverlay ?
-      {
-        warnings: false,
-        errors: true
-      } :
-      false,
-    publicPath: config.dev.assetsPublicPath,
-    watchOptions: {
-      poll: config.dev.poll,
+    port: 5000,
+    overlay: {
+      warnings: false,
+      errors: true
     }
   },
   plugins: [
@@ -46,13 +37,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../static'),
-      to: config.dev.assetsSubDirectory,
+      to: 'static',
       ignore: ['.*']
     }])
   ]
 })
 
 module.exports = new Promise((resolve, reject) => {
-  devWebpackConfig.devServer.port = process.env.PORT || config.dev.port;
   resolve(devWebpackConfig);
 });

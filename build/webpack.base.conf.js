@@ -1,7 +1,5 @@
 'use strict'
 const path = require('path')
-const utils = require('./utils')
-const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
@@ -25,7 +23,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        options:  vueLoaderConfig
       },
       {
         test: /\.js$/,
@@ -37,7 +35,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
         }
       }
     ]
