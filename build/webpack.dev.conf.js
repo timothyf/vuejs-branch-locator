@@ -1,15 +1,69 @@
 'use strict'
-const utils = require('./utils')
+require('dotenv').config();
 const webpack = require('webpack')
-const merge = require('webpack-merge')
 const path = require('path')
-const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const devWebpackConfig = merge(baseWebpackConfig, {
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+const devWebpackConfig = {
+  context: path.resolve(__dirname, '../'),
+  entry: {
+    app: './src/main.js'
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+    }
+  },
   module: {
-    rules: utils.styleLoaders({})
+    rules: [
+      {
+        test: /\.css$/,
+        use:[
+          'vue-style-loader',
+          {
+            loader:'css-loader',
+            options:{}
+          }
+        ]
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options:  {
+          loaders: {
+            css: ['vue-style-loader'].concat([ {
+              loader: 'css-loader',
+              options: {}
+            }])
+          },
+          transformToRequire: {
+            source: 'src',
+            img: 'src',
+            image: 'xlink:href'
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
+        }
+      }
+    ]
   },
 
   devServer: {
@@ -27,8 +81,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       'process.env': require('../config/dev.env')
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
-    // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
@@ -41,7 +93,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ignore: ['.*']
     }])
   ]
-})
+}
 
 module.exports = new Promise((resolve, reject) => {
   resolve(devWebpackConfig);
