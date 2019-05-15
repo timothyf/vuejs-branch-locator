@@ -10,7 +10,7 @@ function resolve (dir) {
 }
 
 const devWebpackConfig = {
-  context: path.resolve(__dirname, '../'),
+  context: path.resolve(__dirname, './'),
   entry: {
     app: './src/main.js'
   },
@@ -78,7 +78,7 @@ const devWebpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
+      'process.env': require('./config/dev.env')
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
@@ -88,7 +88,7 @@ const devWebpackConfig = {
     }),
     // copy custom static assets
     new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../static'),
+      from: path.resolve(__dirname, './static'),
       to: 'static',
       ignore: ['.*']
     }])
