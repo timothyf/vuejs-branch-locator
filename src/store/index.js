@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueResource from 'vue-resource'
-import client from '../api/mock'
 
 Vue.use(Vuex)
 Vue.use(VueResource)
@@ -110,31 +109,35 @@ export default new Vuex.Store({
       fetchData({commit, dispatch, state}, payload) {
         let location = payload.location;
         let searchRadius = payload.searchRadius;
-        let searchType = payload.searchType;
-        return client.fetchData(location, searchRadius)
-            .then(data => {
-              if (data) {
-                console.log("got data");
-                data.forEach(function(item) {
-                  if (item.branchLocations) {
-                    dispatch('parseBranches', {branches:item.branchLocations, location:location});
-                  }
-                  else if (item.field_job_title == "Mortgage Consultant") {
-                    commit('ADD_MORTGAGE_CONSULTANT', item);
-                  }
-                  else if (item.field_job_title == "Relationship Manager") {
-                    commit('ADD_RELATIONSHIP_MANAGER', item);
-                  }
-                  else if (item.field_job_title == "Private Banker") {
-                    commit('ADD_PRIVATE_BANKER', item);
-                  }
-                  else if (item.error) {
-                    commit('SET_BRANCHES', []);
-                    commit('RESET_PEOPLE');
-                    dispatch('setSelectedLocation', location);
-                  }
-                });
-              }
+        let latParam = "field_geocoordinates_proximity-lat=" + location.lat;
+        let lngParam = "&field_geocoordinates_proximity-lng=" + location.lng;
+        let radiusParam = "&field_geocoordinates_proximity=" + searchRadius;
+        Vue.http.get(process.env.BRANCHES_API_BASE_URL + latParam + lngParam + radiusParam)
+            .then(function(response) {
+              response.json().then(data => {
+                if (data) {
+                  console.log("got data");
+                  data.forEach(function(item) {
+                    if (item.branchLocations) {
+                      dispatch('parseBranches', {branches:item.branchLocations, location:location});
+                    }
+                    else if (item.field_job_title == "Mortgage Consultant") {
+                      commit('ADD_MORTGAGE_CONSULTANT', item);
+                    }
+                    else if (item.field_job_title == "Relationship Manager") {
+                      commit('ADD_RELATIONSHIP_MANAGER', item);
+                    }
+                    else if (item.field_job_title == "Private Banker") {
+                      commit('ADD_PRIVATE_BANKER', item);
+                    }
+                    else if (item.error) {
+                      commit('SET_BRANCHES', []);
+                      commit('RESET_PEOPLE');
+                      dispatch('setSelectedLocation', location);
+                    }
+                  });
+                }
+              });
             });
       }
     }
