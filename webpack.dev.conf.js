@@ -2,7 +2,6 @@
 require('dotenv').config();
 const webpack = require('webpack')
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function resolve (dir) {
@@ -85,13 +84,7 @@ const devWebpackConfig = {
       filename: 'index.html',
       template: 'index.html',
       inject: true
-    }),
-    // copy custom static assets
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, './static'),
-      to: 'static',
-      ignore: ['.*']
-    }])
+    })
   ]
 }
 
