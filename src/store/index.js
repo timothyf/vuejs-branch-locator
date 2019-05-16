@@ -82,24 +82,26 @@ export default new Vuex.Store({
         for (var branch of branches) {
           branch.services = {};
           let branchServices = branch.branchInfo.branchServices;
-          for (var service of branchServices) {
-            if (service.serviceId == 1 || service.serviceId == 2 || service.serviceId == 3 || service.serviceId == 5) {
-              branch.services.atm = true;
-            }
-            else if (service.serviceId == 4) {
-              // not sure what this serviceId is
-            }
-            else if (service.serviceId == 6) {
-              branch.services.nightDrop = true;
-            }
-            else if (service.serviceId == 7) {
-              branch.services.safeDeposit = true;
-            }
-            else if (service.serviceId == 8) {
-              branch.services.currency = true;
-            }
-            else if (service.serviceId == 9) {
-              branch.services.extendedHours = true;
+          if (branchServices) {
+            for (var service of branchServices) {
+              if (service.serviceId == 1 || service.serviceId == 2 || service.serviceId == 3 || service.serviceId == 5) {
+                branch.services.atm = true;
+              }
+              else if (service.serviceId == 4) {
+                // not sure what this serviceId is
+              }
+              else if (service.serviceId == 6) {
+                branch.services.nightDrop = true;
+              }
+              else if (service.serviceId == 7) {
+                branch.services.safeDeposit = true;
+              }
+              else if (service.serviceId == 8) {
+                branch.services.currency = true;
+              }
+              else if (service.serviceId == 9) {
+                branch.services.extendedHours = true;
+              }
             }
           }
         }
