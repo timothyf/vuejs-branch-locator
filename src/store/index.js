@@ -107,6 +107,7 @@ export default new Vuex.Store({
         dispatch('setSelectedLocation', location);
       },
       fetchData({commit, dispatch, state}, payload) {
+        commit('RESET_PEOPLE');
         let location = payload.location;
         let searchRadius = payload.searchRadius;
         let latParam = "field_geocoordinates_proximity-lat=" + location.lat;

@@ -1,6 +1,7 @@
 <template>
   <div id="search-results-container">
-    <locations-list v-if="branches.length>0 || mortgageConsultants.length>0"></locations-list>
+    <locations-list v-if="(searchType == 'Branch' && branches.length>0) ||
+                          (searchType == 'Mortgage Consultant' && mortgageConsultants.length>0)"></locations-list>
     <div id="no-results" v-else>
       No Locations Found
     </div>
@@ -14,16 +15,19 @@
 
   export default {
     computed: {
-      branches () {
+      searchType() {
+        return this.$store.getters.searchType;
+      },
+      branches() {
         return this.$store.getters.branches;
       },
-      mortgageConsultants () {
+      mortgageConsultants() {
         return this.$store.getters.mortgageConsultants;
       },
-      privateBankers () {
+      privateBankers() {
         return this.$store.getters.privateBankers;
       },
-      relationshipManagers () {
+      relationshipManagers() {
         return this.$store.getters.relationshipManagers;
       }
     },
