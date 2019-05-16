@@ -1,6 +1,9 @@
 <template>
   <div id="search-results-container">
-    <locations-list></locations-list>
+    <locations-list v-if="branches.length>0 || mortgageConsultants.length>0"></locations-list>
+    <div id="no-results" v-else>
+      No Locations Found
+    </div>
     <map-panel></map-panel>
   </div>
 </template>
@@ -10,6 +13,20 @@
   import MapPanel from './MapPanel'
 
   export default {
+    computed: {
+      branches () {
+        return this.$store.getters.branches;
+      },
+      mortgageConsultants () {
+        return this.$store.getters.mortgageConsultants;
+      },
+      privateBankers () {
+        return this.$store.getters.privateBankers;
+      },
+      relationshipManagers () {
+        return this.$store.getters.relationshipManagers;
+      }
+    },
     components: {
       'locations-list': LocationsList,
       'map-panel': MapPanel
@@ -22,5 +39,14 @@
   width: 1366px;
   display: flex;
   flex: 1 1 auto;
+}
+#no-results {
+  width: 503px;
+  height: 505px;
+  background-color: #ededed;
+  padding: 30px;
+  font-size: 16pt;
+  font-family: Graphik;
+  font-family: 'Poppins', sans-serif;
 }
 </style>
