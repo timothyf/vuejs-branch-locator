@@ -49,10 +49,10 @@
           </div>
         </div>
       </div>
-      <div id="service-filters">
+      <!-- <div id="service-filters">
         <label>Filter by Bank Services</label>
         <div id="expander"></div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>

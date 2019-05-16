@@ -171,10 +171,7 @@ export default {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.57;
-    letter-spacing: normal;
     text-align: right;
     color: #e51b24;
   }
@@ -184,10 +181,7 @@ export default {
     height: 27px;
     font-size: 16px;
     font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.69;
-    letter-spacing: normal;
     color: #5b5b5b;
   }
   .address-2 {
@@ -196,10 +190,7 @@ export default {
     height: 27px;
     font-size: 16px;
     font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.69;
-    letter-spacing: normal;
     color: #5b5b5b;
   }
   .branch-phone {

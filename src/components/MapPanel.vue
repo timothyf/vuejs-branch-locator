@@ -100,6 +100,19 @@
       },
       addMapMarkers() {
         let markers = {}
+        // Add searched position marker
+        const marker = {};
+        marker.id = 0;
+        marker.position = {
+          lat: this.selectedLocation.lat,
+          lng: this.selectedLocation.lng
+        }
+        marker.icon = {
+          url: process.env.SEARCHED_POSITION_ICON,
+          scaledSize: this.mapMarkerIconSize
+        }
+        markers[0] = marker;
+
         if (this.searchType == 'Branch') {
           for (let i = 0; i < this.branches.length; i++) {
             let location = {

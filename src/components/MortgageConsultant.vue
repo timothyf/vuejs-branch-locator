@@ -167,11 +167,15 @@ export default {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.14;
-    letter-spacing: normal;
     color: #5b5b5b;
+  }
+  .person-title, .person-nmls {
+    height: 20px;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.67;
+    color: #8b8b8b;
   }
   .person-distance {
     width: 90px;
@@ -187,26 +191,14 @@ export default {
     text-align: right;
     color: #e51b24;
   }
-  .address-1 {
+  .address-1, .address-2 {
+    width: 280px;
+    height: 27px;
     font-family: Graphik;
     font-family: 'Poppins', sans-serif;
-    height: 27px;
     font-size: 16px;
     font-weight: normal;
     font-style: normal;
-    font-stretch: normal;
-    line-height: 1.69;
-    letter-spacing: normal;
-    color: #5b5b5b;
-  }
-  .address-2 {
-    font-family: Graphik;
-    font-family: 'Poppins', sans-serif;
-    height: 27px;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
     line-height: 1.69;
     letter-spacing: normal;
     color: #5b5b5b;
@@ -216,7 +208,11 @@ export default {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     color: #5b5b5b;
-    line-height: 1.57;
+    font-weight: normal;
+  }
+  .person-phone a {
+    color: #5b5b5b;
+    text-decoration: none;
   }
   .person-phone img, .person-email img {
     width: 20px;
