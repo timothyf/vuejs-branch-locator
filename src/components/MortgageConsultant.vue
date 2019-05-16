@@ -105,8 +105,8 @@ export default {
         let origin = location;
         var service = new google.maps.DistanceMatrixService();
         var destination = {};
-        destination.lat = that.person.field_primary_address_export.geocoordinates.latitude;
-        destination.lng = that.person.field_primary_address_export.geocoordinates.longitude;
+        destination.lat = parseFloat(that.person.field_primary_address_export.geocoordinates.latitude);
+        destination.lng = parseFloat(that.person.field_primary_address_export.geocoordinates.longitude);
         service.getDistanceMatrix(
           {
             origins: [origin],
