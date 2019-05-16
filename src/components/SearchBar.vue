@@ -131,7 +131,9 @@ export default {
           };
           that.currentLocation = location;
           that.selectedLocation = location;
-          that.getAddress(location);
+          that.getAddress(location).then(function() {
+            that.handleSearch();
+          });
         }, function() {
           console.log("Error getting current location");
         });
@@ -146,18 +148,23 @@ export default {
     getAddress(location) {
       var geocoder = new google.maps.Geocoder;
       var that = this;
-      geocoder.geocode({'location': location}, function(results, status) {
-        if (status === 'OK') {
-          if (results[0]) {
-            that.currentAddress = results[0].formatted_address;
+      return new Promise(function(resolve, reject) {
+        geocoder.geocode({'location': location}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              that.currentAddress = results[0].formatted_address;
+              resolve();
+            }
+            else {
+              console.log('No results found');
+              reject();
+            }
           }
           else {
-            console.log('No results found');
+            console.log('Geocoder failed due to: ' + status);
+            reject();
           }
-        }
-        else {
-          console.log('Geocoder failed due to: ' + status);
-        }
+        });
       });
     }
   }

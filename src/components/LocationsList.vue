@@ -77,9 +77,6 @@ export default {
       if (itemsList && selectedItem) {
         itemsList.scrollTop = selectedItem.offsetTop - selectedItem.offsetHeight;
       }
-    },
-    resetComponentData() {
-      this.ignoreScrollToSelectedItem = false;
     }
   },
   watch: {
