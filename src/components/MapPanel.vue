@@ -63,11 +63,14 @@
     },
     watch: {
       selectedLocation() {
-        this.updateMapCenter(this.selectedLocation)
+        this.updateMapCenter(this.selectedLocation);
       },
       selectedItem(newValue, oldValue) {
-        this.selectMapMarker(oldValue, false)
-        this.selectMapMarker(newValue, true)
+        this.selectMapMarker(oldValue, false);
+        this.selectMapMarker(newValue, true);
+      },
+      searchType() {
+        this.updateMapCenter(this.selectedLocation);
       }
     },
     methods: {
@@ -134,7 +137,6 @@
           scaledSize: this.mapMarkerIconSize
         }
         return marker;
-        //markers[markerId] = marker;
       },
       centerOnItem(location) {
         // will repositioned the map center to the specific location
@@ -148,7 +150,6 @@
         }
       },
       selectMapMarker(id, isOn) {
-        // will make the specified id marker either heilighted or not
         if (this.mapMarkers && this.mapMarkers[id]) {
           const url = isOn ? process.env.SELECTED_MAP_ICON : process.env.DEFAULT_MAP_ICON
           const icon = {
