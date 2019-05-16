@@ -1,7 +1,10 @@
 <template>
   <div id="search-results-container">
     <locations-list v-if="(searchType == 'Branch' && branches.length>0) ||
-                          (searchType == 'Mortgage Consultant' && mortgageConsultants.length>0)"></locations-list>
+                          (searchType == 'Mortgage Consultant' && mortgageConsultants.length>0) ||
+                          (searchType == 'Private Banker' && privateBankers.length>0) ||
+                          (searchType == 'Relationship Manager' && relationshipManagers.length>0)">
+    </locations-list>
     <div id="no-results" v-else>
       No Locations Found
     </div>

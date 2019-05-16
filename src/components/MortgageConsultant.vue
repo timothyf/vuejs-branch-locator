@@ -58,17 +58,6 @@ export default {
      this.getDistance();
   },
   methods: {
-    // getPersonHoursDesc() {
-    //   if (this.person.operationalHours.open24Hours) {
-    //     return 'Open 24 hours';
-    //   } else if (this.person.operationalHours.todayHrs) {
-    //     return 'Open until: ' + moment(this.person.operationalHours.todayHrs.endHr, 'hh:mm').format('hh:mm a');
-    //   } else if (this.person.operationalHours.monToFriHrs) {
-    //     return 'Open until: ' + moment(this.person.operationalHours.monToFriHrs.endHr, 'hh:mm').format('hh:mm a');
-    //   } else {
-    //     return '(call for person hours)';
-    //   }
-    // },
     onPersonClick(personId) {
       this.$store.dispatch('setSelectedItem', personId);
     },

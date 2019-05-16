@@ -12,25 +12,23 @@
                          :index="index"
                          v-bind:key="person.id"></mortgage-consultant>
 
-    <private-banker v-if="searchType == 'Private Banker'"
+    <mortgage-consultant v-if="searchType == 'Private Banker'"
                    v-for="(person, index) in privateBankers"
                    v-bind:person="person"
                    :index="index"
-                   v-bind:key="person.id"></private-banker>
+                   v-bind:key="person.id"></mortgage-consultant>
 
-    <relationship-manager v-if="searchType == 'Relationship Manager'"
+    <mortgage-consultant v-if="searchType == 'Relationship Manager'"
                           v-for="(person, index) in relationshipManagers"
                           v-bind:person="person"
                           :index="index"
-                          v-bind:key="person.id"></relationship-manager>
+                          v-bind:key="person.id"></mortgage-consultant>
   </div>
 </template>
 
 <script>
 import BranchLocation from './BranchLocation'
 import MortgageConsultant from './MortgageConsultant'
-import PrivateBanker from './PrivateBanker'
-import RelationshipManager from './RelationshipManager'
 export default {
   data() {
     return {
@@ -39,9 +37,7 @@ export default {
   },
   components: {
     'branch-location': BranchLocation,
-    'mortgage-consultant': MortgageConsultant,
-    'private-banker': PrivateBanker,
-    'relationship-manager': RelationshipManager
+    'mortgage-consultant': MortgageConsultant
   },
   computed: {
     selectedItem: {
