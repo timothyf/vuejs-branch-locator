@@ -1,0 +1,688 @@
+[
+  {
+    "title": "Liza Haworth",
+    "field_job_title": "Producing Sales Manager",
+    "field_employee_position": "",
+    "field_name": "Liza Haworth",
+    "field_nmls": "1280681",
+    "field_primary_address_export": {
+      "id": "9556",
+      "address": {
+        "address_line1": "330 North Brand Blvd",
+        "address_line2": "",
+        "city": "Glendale",
+        "state": "CA",
+        "zipcode": "91203",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "34.1511674",
+        "longitude": "-118.25462795217"
+      }
+    },
+    "field_mc_phone": "818-263-6845",
+    "field_email": "Liza.Haworth@unionbank.com",
+    "field_fax": "",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-03\/Liza_%20Haworth_120681_0.jpg?itok=FaUdieKt",
+      "alt": "Liza Haworth"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "Liza Haworth, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact Liza Haworth, Mortgage Loan Officer in Glendale, CA 91203Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, Liza Haworth, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>34.1511674, -118.25462795217&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "6.9"
+  },
+  {
+    "title": "Charles Miller",
+    "field_job_title": "Mortgage Consultant",
+    "field_employee_position": "",
+    "field_name": "Charles Miller",
+    "field_nmls": "723551",
+    "field_primary_address_export": {
+      "id": "9741",
+      "address": {
+        "address_line1": "1901 Avenue Of Stars",
+        "address_line2": "",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipcode": "90067",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "34.0595286",
+        "longitude": "-118.4176184"
+      }
+    },
+    "field_mc_phone": "310-270-8371",
+    "field_email": "Charles.Miller@unionbank.com",
+    "field_fax": "310-878-4624",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-03\/Charles_Miller_723551_0.jpg?itok=UpTBs6mS",
+      "alt": "Charles Miller"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "Charles Miller, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact Charles Miller, Mortgage Loan Officer in Los Angeles, CA 90067. Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.<br />\r\n",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, Charles Miller, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com<br />\r\n",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages\/refinance",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>34.0595286, -118.4176184&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "10.0"
+  },
+  {
+    "title": "Rafael Mendez",
+    "field_job_title": "Mortgage Consultant",
+    "field_employee_position": "",
+    "field_name": "Rafael Mendez",
+    "field_nmls": "723464",
+    "field_primary_address_export": {
+      "id": "12356",
+      "address": {
+        "address_line1": "9460 Wilshire Blvd",
+        "address_line2": "",
+        "city": "Beverly Hills",
+        "state": "CA",
+        "zipcode": "90212",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "34.066976",
+        "longitude": "-118.399227"
+      }
+    },
+    "field_mc_phone": "310-413-6311",
+    "field_email": "Rafael.Mendez@unionbank.com",
+    "field_fax": "310-354-4785",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-03\/Rafael-Mendez-723464_0.jpg?itok=C8GACJlB",
+      "alt": "Rafael Mendez"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "Rafael Mendez, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact Rafael Mendez, Mortgage Loan Officer in Beverly Hills, CA 90212. Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, Rafael Mendez, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages\/refinance",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>34.066976, -118.399227&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "9.0"
+  },
+  {
+    "title": "David Rubenstein",
+    "field_job_title": "Mortgage Consultant",
+    "field_employee_position": "",
+    "field_name": "David Rubenstein",
+    "field_nmls": "653806",
+    "field_primary_address_export": {
+      "id": "12596",
+      "address": {
+        "address_line1": "11661 San Vicente Blv",
+        "address_line2": "",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipcode": "90049",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "34.0610833",
+        "longitude": "-118.3670881"
+      }
+    },
+    "field_mc_phone": "818-264-9703",
+    "field_email": "David.Rubenstein@unionbank.com",
+    "field_fax": "310-207-8427",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-03\/David_Rubenstein_653806_0.jpg?itok=MhBrj6ea",
+      "alt": "David Rubenstein"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "David Rubenstein, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact David Rubenstein, Mortgage Loan Officer in Los Angeles, CA 90049. Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.<br />\r\n",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, David Rubenstein, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com<br />\r\n",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages\/refinance",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>34.0610833, -118.3670881&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "7.1"
+  },
+  {
+    "title": "Arfae Tavosy",
+    "field_job_title": "Mortgage Consultant",
+    "field_employee_position": "",
+    "field_name": "Arfae Tavosy",
+    "field_nmls": "485762",
+    "field_primary_address_export": {
+      "id": "8666",
+      "address": {
+        "address_line1": "9460 Wilshire Blvd",
+        "address_line2": "",
+        "city": "Beverly Hills",
+        "state": "CA",
+        "zipcode": "90212",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "34.066976",
+        "longitude": "-118.399227"
+      }
+    },
+    "field_mc_phone": "310-383-6449",
+    "field_email": "Arfae.Tavosy@unionbank.com",
+    "field_fax": "",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-04\/P_mortgage-headshot-placeholder-male_0.png?itok=JP698ReN",
+      "alt": "mortgage headshot placeholder male"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "Arfae Tavosy, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact Arfae Tavosy, Mortgage Loan Officer in Beverly Hills, CA 90212. Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, Arfae Tavosy, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages\/refinance",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>34.066976, -118.399227&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "9.0"
+  },
+  {
+    "title": "Irma Bradley",
+    "field_job_title": "Mortgage Consultant",
+    "field_employee_position": "",
+    "field_name": "Irma Bradley",
+    "field_nmls": "450805",
+    "field_primary_address_export": {
+      "id": "10001",
+      "address": {
+        "address_line1": "900 South Main St",
+        "address_line2": "",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipcode": "90015",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "34.041458",
+        "longitude": "-118.255"
+      }
+    },
+    "field_mc_phone": "310-614-5050",
+    "field_email": "Irma.Bradley@unionbank.com",
+    "field_fax": "310-220-6540",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-03\/Irma_WilliamsBradley_450850_0.jpg?itok=9zPwDYTf",
+      "alt": "Irma WilliamsBradley"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "Irma Bradley, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact Irma Bradley, Mortgage Loan Officer in Los Angeles, CA 90015. Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.<br />\r\n",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, Irma Bradley, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com<br />\r\n",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages\/refinance",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>34.041458, -118.255&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "1.0"
+  },
+  {
+    "title": "Michael Vazquez",
+    "field_job_title": "Mortgage Consultant",
+    "field_employee_position": "",
+    "field_name": "Michael Vazquez",
+    "field_nmls": "1078017",
+    "field_primary_address_export": {
+      "id": "13416",
+      "address": {
+        "address_line1": "8710 Garfield Ave",
+        "address_line2": "",
+        "city": "South Gate",
+        "state": "CA",
+        "zipcode": "90280",
+        "country": "US",
+        "langcode": ""
+      },
+      "geocoordinates": {
+        "latitude": "33.95223561456",
+        "longitude": "-118.16414268677"
+      }
+    },
+    "field_mc_phone": "562-685-5931",
+    "field_email": "Michael.Vazquez@unionbank.com",
+    "field_fax": "562-591-5783",
+    "body": "",
+    "profile_image": {
+      "url": "http:\/\/unionbank.prod.acquia-sites.com\/sites\/default\/files\/styles\/thumbnail\/public\/2019-03\/Michael-Vasquez-1078017_0.jpg?itok=uAOjhZIy",
+      "alt": "Michael Vasquez"
+    },
+    "profile_image_meta": {
+      "x_coordinate": "50",
+      "y_coordinate": "50"
+    },
+    "field_page_title": "Michael Vazquez, Mortgage Loan Officer  - Union Bank",
+    "field_meta_description": "Contact Michael Vazquez, Mortgage Loan Officer in South Gate, CA 90280. Learn about Union Bank home mortgage options, refinancing, pre-qualification or schedule a consultation.",
+    "field_meta_keywords": "union bank loan officer, union bank mortgage consultant, mortgage loan officer, new home loan, Michael Vazquez, mortgage loan, home mortgage, pre-qualification, refinancing, residential, unionbank.com",
+    "field_team_members_export": [],
+    "field_primary_cta_export": {
+      "url": "\/personal\/home-mortgages\/buying-a-home",
+      "text": "Buy a home"
+    },
+    "field_secondary_cta_export": {
+      "url": "\/personal\/home-mortgages\/refinance",
+      "text": "Refinance a home"
+    },
+    "field_tertiary_cta_export": {
+      "url": "\/personal\/home-mortgages",
+      "text": "Explore our loan options"
+    },
+    "field_geocoordinates": "<span>\n  <span>\n    \n    \n  &lt;\/span&gt;\n  <span>33.95223561456, -118.16414268677&lt;\/span&gt;\n&lt;\/span&gt;\n",
+    "field_geocoordinates_proximity": "8.3"
+  },
+  {
+    "branchLocations": [{
+      "branchInfo": {
+        "branchToken": "769",
+        "branchId": "102",
+        "branchName": "Little Tokyo",
+        "address": {
+          "addressLine": ["120 South San Pedro Street"],
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipcode": "90012",
+          "countyCode": "LA"
+        },
+        "alternateCity": "Los Angeles",
+        "phone": "213-972-5500",
+        "fax": "213-972-5563",
+        "branchServices": [{
+          "serviceId": "2",
+          "searchLabel": "Talking ATM"
+        }, {
+          "serviceId": "3",
+          "searchLabel": "Walk-up ATM"
+        }, {
+          "serviceId": "6",
+          "searchLabel": "Night Drop"
+        }, {
+          "serviceId": "7",
+          "searchLabel": "Safe Deposit"
+        }, {
+          "serviceId": "8",
+          "searchLabel": "Foreign Currency<br>Exchange"
+        }],
+        "branchFacilityTypes": [{
+          "facilityTypeId": "2"
+        }],
+        "latitude": 34.050181000000002,
+        "longitude": -118.241086,
+        "lastUpdatedTs": "2010-03-01T12:33:05.374-08:00",
+        "lastUpdatedBy": "ub34156 (Mary Fowler)"
+      },
+      "branchHours": [{
+        "branchHoursId": "10725",
+        "displayHours": "8:00AM - 5:00PM",
+        "displayLabel": "M-Th",
+        "displayOrder": 10
+      }, {
+        "branchHoursId": "10726",
+        "displayHours": "8:00AM - 5:00PM",
+        "displayLabel": "Fri",
+        "displayOrder": 50
+      }],
+      "distance": ".2"
+    }, {
+      "branchInfo": {
+        "branchToken": "778",
+        "branchId": "113",
+        "branchName": "Los Angeles Main",
+        "address": {
+          "addressLine": ["445 South Figueroa Street"],
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipcode": "90071",
+          "countyCode": "LA"
+        },
+        "alternateCity": "Los Angeles",
+        "phone": "213-236-7700",
+        "fax": "213-236-7734",
+        "branchServices": [{
+          "serviceId": "2",
+          "searchLabel": "Talking ATM"
+        }, {
+          "serviceId": "3",
+          "searchLabel": "Walk-up ATM"
+        }, {
+          "serviceId": "5",
+          "searchLabel": "Lobby ATM"
+        }, {
+          "serviceId": "7",
+          "searchLabel": "Safe Deposit"
+        }, {
+          "serviceId": "8",
+          "searchLabel": "Foreign Currency<br>Exchange"
+        }],
+        "branchFacilityTypes": [{
+          "facilityTypeId": "2"
+        }],
+        "latitude": 34.052399999999999,
+        "longitude": -118.2572,
+        "lastUpdatedTs": "2010-03-01T12:40:19.817-08:00",
+        "lastUpdatedBy": "ub34156 (Mary Fowler)"
+      },
+      "branchHours": [{
+        "branchHoursId": "10753",
+        "displayHours": "8:00AM - 5:00PM",
+        "displayLabel": "M-Th",
+        "displayOrder": 10
+      }, {
+        "branchHoursId": "10754",
+        "displayHours": "8:00AM - 5:00PM",
+        "displayLabel": "Fri",
+        "displayOrder": 50
+      }],
+      "distance": ".8"
+    }, {
+      "branchInfo": {
+        "branchToken": "835",
+        "branchId": "309",
+        "branchName": "California Mart",
+        "address": {
+          "addressLine": ["900 South Main Street"],
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipcode": "90015",
+          "countyCode": "LA"
+        },
+        "alternateCity": "Los Angeles",
+        "phone": "213-312-4500",
+        "fax": "213-627-7918",
+        "branchServices": [{
+          "serviceId": "2",
+          "searchLabel": "Talking ATM"
+        }, {
+          "serviceId": "3",
+          "searchLabel": "Walk-up ATM"
+        }, {
+          "serviceId": "7",
+          "searchLabel": "Safe Deposit"
+        }, {
+          "serviceId": "8",
+          "searchLabel": "Foreign Currency<br>Exchange"
+        }],
+        "branchFacilityTypes": [{
+          "facilityTypeId": "2"
+        }],
+        "latitude": 34.041601,
+        "longitude": -118.255,
+        "lastUpdatedTs": "2010-03-01T09:13:47.644-08:00",
+        "lastUpdatedBy": "ub34156 (Mary Fowler)"
+      },
+      "branchHours": [{
+        "branchHoursId": "10937",
+        "displayHours": "9:00AM - 5:00PM",
+        "displayLabel": "M-Th",
+        "displayOrder": 10
+      }, {
+        "branchHoursId": "10938",
+        "displayHours": "9:00AM - 5:00PM",
+        "displayLabel": "Fri",
+        "displayOrder": 50
+      }],
+      "distance": "1"
+    }, {
+      "branchInfo": {
+        "branchToken": "13150",
+        "branchId": "511",
+        "branchName": "Atwater",
+        "address": {
+          "addressLine": ["3355 Glendale Blvd."],
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipcode": "90039",
+          "countyCode": "LA"
+        },
+        "alternateCity": "Los Angeles",
+        "phone": "323-664-2981",
+        "branchServices": [{
+          "serviceId": "1",
+          "searchLabel": "ATM"
+        }, {
+          "serviceId": "3",
+          "searchLabel": "Walk-up ATM"
+        }, {
+          "serviceId": "6",
+          "searchLabel": "Night Drop"
+        }],
+        "branchFacilityTypes": [{
+          "facilityTypeId": "2"
+        }],
+        "latitude": 34.119500000000002,
+        "longitude": -118.2595,
+        "lastUpdatedBy": "ub53964 (Thayabaran Nagendran)"
+      },
+      "branchHours": [{
+        "branchHoursId": "11980",
+        "displayHours": "9:00AM - 5:00PM",
+        "displayLabel": "M-Th",
+        "displayOrder": 10
+      }, {
+        "branchHoursId": "11981",
+        "displayHours": "9:00AM - 6:00PM",
+        "displayLabel": "Fri",
+        "displayOrder": 50
+      }, {
+        "branchHoursId": "11982",
+        "displayHours": "9:00AM - 1:00PM",
+        "displayLabel": "Sat",
+        "displayOrder": 60
+      }],
+      "distance": "4.7"
+    }, {
+      "branchInfo": {
+        "branchId": "292",
+        "branchName": "Huntington Park (Inside Superior)",
+        "address": {
+          "addressLine": ["6010 Pacific Blvd"],
+          "city": "Huntington Park",
+          "state": "CA",
+          "zipcode": "90255",
+          "countyCode": "LA"
+        },
+        "alternateCity": "Huntington Park",
+        "phone": "323 589-4697",
+        "fax": "323 589-1827",
+        "emergencyMessage": "Additional Services: Cash &amp; Save",
+        "branchServices": [{
+          "serviceId": "9",
+          "searchLabel": "Extended Hours"
+        }],
+        "branchFacilityTypes": [{
+          "facilityTypeId": "2"
+        }, {
+          "facilityTypeId": "3",
+          "facilityTypeName": "Cash &amp; Save"
+        }],
+        "latitude": 33.986728999999997,
+        "longitude": -118.223658,
+        "lastUpdatedTs": "2011-08-18T09:15:22.553-07:00",
+        "lastUpdatedBy": "ub34156 (Mary Fowler)"
+      },
+      "branchHours": [{
+        "branchHoursId": "12367",
+        "displayHours": "9:00AM - 7:00PM",
+        "displayLabel": "M-Th",
+        "displayOrder": 10
+      }, {
+        "branchHoursId": "12368",
+        "displayHours": "9:00AM - 7:00PM",
+        "displayLabel": "Fri",
+        "displayOrder": 50
+      }, {
+        "branchHoursId": "12369",
+        "displayHours": "10:00AM - 4:00PM",
+        "displayLabel": "Sat",
+        "displayOrder": 60
+      }, {
+        "branchHoursId": "12370",
+        "displayHours": "10:00AM - 4:00PM",
+        "displayLabel": "Sun",
+        "displayOrder": 70
+      }],
+      "distance": "4.7"
+    }, {
+      "branchInfo": {
+        "branchToken": "8767",
+        "branchId": "267",
+        "branchName": "Gage Avenue (Inside El Super)",
+        "address": {
+          "addressLine": ["1401 East Gage Avenue"],
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipcode": "90001",
+          "countyCode": "LA"
+        },
+        "alternateCity": "Los Angeles",
+        "phone": "323 277-3770",
+        "fax": "323 277-3774",
+        "emergencyMessage": "Additional Services: Cash &amp; Save",
+        "branchServices": [{
+          "serviceId": "1",
+          "searchLabel": "ATM"
+        }, {
+          "serviceId": "2",
+          "searchLabel": "Talking ATM"
+        }, {
+          "serviceId": "5",
+          "searchLabel": "Lobby ATM"
+        }, {
+          "serviceId": "9",
+          "searchLabel": "Extended Hours"
+        }],
+        "branchFacilityTypes": [{
+          "facilityTypeId": "2"
+        }, {
+          "facilityTypeId": "3",
+          "facilityTypeName": "Cash &amp; Save"
+        }],
+        "latitude": 33.981999999999999,
+        "longitude": -118.2499,
+        "lastUpdatedTs": "2011-08-18T08:16:09.391-07:00",
+        "lastUpdatedBy": "ub34156 (Mary Fowler)"
+      },
+      "branchHours": [{
+        "branchHoursId": "11954",
+        "displayHours": "9:00AM - 7:00PM",
+        "displayLabel": "M-Th",
+        "displayOrder": 10
+      }, {
+        "branchHoursId": "11955",
+        "displayHours": "9:00AM - 7:00PM",
+        "displayLabel": "Fri",
+        "displayOrder": 50
+      }, {
+        "branchHoursId": "11956",
+        "displayHours": "10:00AM - 4:00PM",
+        "displayLabel": "Sat",
+        "displayOrder": 60
+      }, {
+        "branchHoursId": "11957",
+        "displayHours": "10:00AM - 4:00PM",
+        "displayLabel": "Sun",
+        "displayOrder": 70
+      }],
+      "distance": "4.9"
+    }]
+  }
+]
